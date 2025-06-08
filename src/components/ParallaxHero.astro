@@ -1,0 +1,682 @@
+---
+/*
+═══════════════════════════════════════════════════════════════════════════════
+🎬 ENHANCED MULTI-LAYER PARALLAX HERO SECTION
+═══════════════════════════════════════════════════════════════════════════════
+
+Features:
+- 4-layer parallax with different speeds and effects
+- Glassmorphism content card with backdrop blur
+- Floating particle system with physics
+- Responsive 3D text effects
+- Smart viewport detection and optimization
+- Dopamine color integration
+- Performance-optimized animations
+
+Customization:
+- Adjust parallax speeds in data-speed attributes
+- Change particle count and styles
+- Modify glassmorphism opacity and blur
+- Update text content and styling
+
+═══════════════════════════════════════════════════════════════════════════════
+*/
+---
+
+<section id="home" class="relative h-screen overflow-hidden flex items-center justify-center">
+  <!-- Enhanced Parallax Background System -->
+  <div class="absolute inset-0 z-0">
+    <!-- Layer 1: Ultra-slow Background (Mountains) -->
+    <div class="parallax-layer parallax-bg absolute inset-0" data-speed="0.1">
+      <img 
+        src="/image_hintergrund_von_bergspitze.png" 
+        alt="Bergpanorama Hintergrund"
+        class="w-full h-full object-cover scale-110 opacity-90 saturate-110"
+        loading="eager"
+        onerror="this.style.display='none'"
+      >
+      <div class="absolute inset-0 bg-gradient-to-br from-black/30 via-transparent to-black/50"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-dopamine-900/20 via-transparent to-electric-900/10"></div>
+    </div>
+    
+    <!-- Layer 2: Slow Atmospheric Effects -->
+    <div class="parallax-layer parallax-atmosphere absolute inset-0" data-speed="0.25">
+      <div class="absolute inset-0 bg-gradient-radial from-transparent via-dopamine-500/8 to-transparent opacity-60"></div>
+      <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-electric-400/5 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-1/3 right-1/4 w-80 h-80 bg-coral-500/5 rounded-full blur-3xl"></div>
+    </div>
+    
+    <!-- Layer 3: Medium Speed (Midground Effects) -->
+    <div class="parallax-layer parallax-mid absolute inset-0" data-speed="0.4">
+      <div class="absolute inset-0">
+        <!-- Animated gradient overlay -->
+        <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-dopamine-500/10 via-transparent to-electric-500/10 animate-pulse"></div>
+        <!-- Floating light spots -->
+        <div class="absolute top-1/3 left-1/6 w-32 h-32 bg-dopamine-400/20 rounded-full blur-2xl animate-float"></div>
+        <div class="absolute bottom-1/4 right-1/5 w-24 h-24 bg-electric-400/20 rounded-full blur-2xl animate-float-delayed"></div>
+      </div>
+    </div>
+    
+    <!-- Layer 4: Fast Foreground -->
+    <div class="parallax-layer parallax-fg absolute inset-0" data-speed="0.6">
+      <img 
+        src="/image_bergspitze_ohne_hintergrund.png" 
+        alt="Bergspitze Vordergrund"
+        class="w-full h-full object-cover scale-105 contrast-110"
+        loading="eager"
+        onerror="this.style.display='none'"
+      >
+      <!-- Dynamic light overlay -->
+      <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-dopamine-500/10 mix-blend-overlay"></div>
+    </div>
+  </div>
+
+  <!-- Enhanced Floating Particle System -->
+  <div class="absolute inset-0 z-10 pointer-events-none">
+    <!-- Primary particles -->
+    <div class="particle-primary" style="left: 15%; top: 25%; animation-delay: 0s;"></div>
+    <div class="particle-primary" style="left: 85%; top: 15%; animation-delay: 2.5s;"></div>
+    <div class="particle-primary" style="left: 25%; top: 75%; animation-delay: 5s;"></div>
+    <div class="particle-primary" style="left: 75%; top: 65%; animation-delay: 1.5s;"></div>
+    <div class="particle-primary" style="left: 55%; top: 35%; animation-delay: 3.5s;"></div>
+    
+    <!-- Secondary particles -->
+    <div class="particle-secondary" style="left: 35%; top: 45%; animation-delay: 1s;"></div>
+    <div class="particle-secondary" style="left: 65%; top: 25%; animation-delay: 4s;"></div>
+    <div class="particle-secondary" style="left: 45%; top: 85%; animation-delay: 2s;"></div>
+    
+    <!-- Micro particles -->
+    <div class="particle-micro" style="left: 20%; top: 55%; animation-delay: 0.5s;"></div>
+    <div class="particle-micro" style="left: 80%; top: 45%; animation-delay: 3s;"></div>
+    <div class="particle-micro" style="left: 60%; top: 75%; animation-delay: 1.8s;"></div>
+    <div class="particle-micro" style="left: 40%; top: 15%; animation-delay: 4.2s;"></div>
+  </div>
+
+  <!-- Enhanced Hero Content with 3D Effects -->
+  <div class="relative z-20 text-center px-6 max-w-5xl mx-auto" data-animate>
+    <!-- Premium Glassmorphism Card -->
+    <div class="hero-glass-card group relative p-8 md:p-12 lg:p-16 rounded-3xl backdrop-blur-2xl border border-white/20 dark:border-white/10 hero-content perspective-1000">
+      <!-- Animated background elements -->
+      <div class="absolute inset-0 rounded-3xl overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-dopamine-500/5 to-electric-500/5 opacity-0 group-hover:opacity-100 transition-all duration-700"></div>
+        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-dopamine-500/50 to-transparent"></div>
+        <div class="absolute bottom-0 right-0 w-full h-1 bg-gradient-to-l from-transparent via-electric-500/50 to-transparent"></div>
+      </div>
+      
+      <!-- 3D Tilting Text -->
+      <h1 class="relative text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-serif font-bold mb-8 leading-[0.9] tracking-tight preserve-3d">
+        <span class="block opacity-0 translate-y-8 hero-text-1 transform-gpu transition-all duration-700 hover:scale-105">
+          <span class="inline-block perspective-1000 hover:rotate-x-12 transition-transform duration-300">Capturing</span>
+        </span>
+        <span class="block opacity-0 translate-y-8 hero-text-2 bg-gradient-to-r from-dopamine-500 via-electric-400 to-coral-500 bg-clip-text text-transparent text-shadow-glow transform-gpu transition-all duration-700 hover:scale-110">
+          <span class="inline-block perspective-1000 hover:rotate-x-12 transition-transform duration-300">Moments</span>
+        </span>
+        <span class="block opacity-0 translate-y-8 hero-text-3 transform-gpu transition-all duration-700 hover:scale-105">
+          <span class="inline-block perspective-1000 hover:rotate-x-12 transition-transform duration-300">in Time</span>
+        </span>
+      </h1>
+      
+      <!-- Enhanced Subtitle with Microinteractions -->
+      <p class="text-xl md:text-2xl lg:text-3xl text-gray-600 dark:text-gray-300 mb-10 max-w-3xl mx-auto leading-relaxed opacity-0 translate-y-8 hero-subtitle font-light">
+        Professionelle Fotografie mit künstlerischem Anspruch. 
+        <span class="text-dopamine-500 font-medium hover:text-electric-400 transition-colors duration-300 cursor-default">Jeder Moment erzählt eine Geschichte.</span>
+      </p>
+      
+      <!-- Premium CTA Buttons with Advanced Effects -->
+      <div class="flex flex-col sm:flex-row gap-6 justify-center items-center opacity-0 translate-y-8 hero-cta">
+        <button class="cta-primary group relative overflow-hidden">
+          <span class="relative z-10 flex items-center">
+            Portfolio entdecken
+            <svg class="w-5 h-5 ml-3 transition-all duration-300 group-hover:translate-x-2 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+            </svg>
+          </span>
+          <!-- Shimmer effect -->
+          <div class="absolute inset-0 bg-shimmer opacity-0 group-hover:opacity-100 group-hover:animate-shimmer"></div>
+          <!-- Glow effect -->
+          <div class="absolute inset-0 rounded-full bg-gradient-to-r from-dopamine-500 to-electric-500 opacity-0 blur-xl group-hover:opacity-50 transition-opacity duration-300 -z-10"></div>
+        </button>
+        
+        <button class="cta-secondary group relative overflow-hidden">
+          <span class="relative z-10 flex items-center">
+            Kontakt aufnehmen
+            <svg class="w-5 h-5 ml-3 transition-all duration-300 group-hover:scale-125 group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+            </svg>
+          </span>
+          <!-- Ripple effect -->
+          <div class="absolute inset-0 bg-dopamine-500/20 rounded-full scale-0 group-hover:scale-100 transition-transform duration-500 ease-out"></div>
+        </button>
+      </div>
+      
+      <!-- Floating Stats (Optional) -->
+      <div class="flex justify-center gap-8 mt-12 opacity-0 hero-stats">
+        <div class="text-center group cursor-default">
+          <div class="text-2xl font-bold text-dopamine-500 group-hover:scale-110 transition-transform duration-300">500+</div>
+          <div class="text-sm text-gray-500 dark:text-gray-400">Projects</div>
+        </div>
+        <div class="text-center group cursor-default">
+          <div class="text-2xl font-bold text-electric-400 group-hover:scale-110 transition-transform duration-300">50+</div>
+          <div class="text-sm text-gray-500 dark:text-gray-400">Clients</div>
+        </div>
+        <div class="text-center group cursor-default">
+          <div class="text-2xl font-bold text-coral-500 group-hover:scale-110 transition-transform duration-300">5+</div>
+          <div class="text-sm text-gray-500 dark:text-gray-400">Years</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Enhanced Scroll Indicator with Pulsing Effect -->
+  <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 opacity-0 scroll-indicator">
+    <div class="flex flex-col items-center text-white/80 hover:text-dopamine-400 transition-all duration-500 cursor-pointer group">
+      <span class="text-sm font-medium mb-3 tracking-wide">Scroll to explore</span>
+      <div class="relative">
+        <!-- Pulsing ring -->
+        <div class="absolute inset-0 border-2 border-dopamine-500/30 rounded-full animate-ping group-hover:border-dopamine-400/50"></div>
+        <!-- Main arrow -->
+        <div class="relative bg-glass-light dark:bg-glass-dark backdrop-blur-sm rounded-full p-3 border border-white/20 group-hover:border-dopamine-400/50 transition-all duration-300">
+          <svg class="w-6 h-6 animate-bounce group-hover:animate-bounce-slow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Enhanced Glassmorphism Card */
+  .hero-glass-card {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(24px) saturate(180%);
+    box-shadow: 
+      0 32px 64px rgba(0, 0, 0, 0.12),
+      0 8px 32px rgba(243, 82, 255, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    position: relative;
+  }
+
+  .dark .hero-glass-card {
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 
+      0 32px 64px rgba(0, 0, 0, 0.4),
+      0 8px 32px rgba(0, 217, 255, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  /* Performance-optimized parallax layers */
+  .parallax-layer {
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    transition: transform 0.1s ease-out;
+  }
+
+  /* Enhanced particle system */
+  .particle-primary {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: radial-gradient(circle, #f352ff 0%, rgba(243, 82, 255, 0.4) 50%, transparent 100%);
+    border-radius: 50%;
+    animation: float-advanced 8s ease-in-out infinite;
+    opacity: 0.8;
+    box-shadow: 0 0 12px rgba(243, 82, 255, 0.6);
+  }
+
+  .particle-secondary {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: radial-gradient(circle, #00d9ff 0%, rgba(0, 217, 255, 0.4) 50%, transparent 100%);
+    border-radius: 50%;
+    animation: float-advanced 10s ease-in-out infinite;
+    opacity: 0.7;
+    box-shadow: 0 0 8px rgba(0, 217, 255, 0.5);
+  }
+
+  .particle-micro {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: radial-gradient(circle, #ff6b6b 0%, rgba(255, 107, 107, 0.3) 50%, transparent 100%);
+    border-radius: 50%;
+    animation: float-micro 6s ease-in-out infinite;
+    opacity: 0.6;
+  }
+
+  @keyframes float-advanced {
+    0%, 100% { 
+      transform: translateY(0px) translateX(0px) rotate(0deg) scale(1); 
+      opacity: 0.8;
+    }
+    25% { 
+      transform: translateY(-30px) translateX(15px) rotate(90deg) scale(1.1); 
+      opacity: 1;
+    }
+    50% { 
+      transform: translateY(-60px) translateX(-10px) rotate(180deg) scale(0.9); 
+      opacity: 0.6;
+    }
+    75% { 
+      transform: translateY(-30px) translateX(-20px) rotate(270deg) scale(1.05); 
+      opacity: 0.9;
+    }
+  }
+
+  @keyframes float-micro {
+    0%, 100% { 
+      transform: translateY(0px) scale(1); 
+      opacity: 0.6;
+    }
+    50% { 
+      transform: translateY(-20px) scale(1.2); 
+      opacity: 1;
+    }
+  }
+
+  /* Premium CTA Buttons */
+  .cta-primary {
+    @apply px-10 py-5 bg-gradient-to-r from-dopamine-500 via-electric-400 to-dopamine-600 text-white rounded-full font-semibold text-lg transition-all duration-500 flex items-center relative overflow-hidden shadow-lg;
+    background-size: 200% 100%;
+    animation: gradient-shift 3s ease infinite;
+  }
+
+  @keyframes gradient-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  .cta-primary:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 
+      0 20px 40px rgba(243, 82, 255, 0.4),
+      0 0 30px rgba(0, 217, 255, 0.3);
+    animation-play-state: paused;
+  }
+
+  .cta-secondary {
+    @apply px-10 py-5 border-2 border-white/40 dark:border-white/25 text-white hover:bg-white/15 dark:hover:bg-white/10 rounded-full font-semibold text-lg transition-all duration-500 flex items-center backdrop-blur-md relative overflow-hidden;
+    box-shadow: 0 8px 24px rgba(255, 255, 255, 0.1);
+  }
+
+  .cta-secondary:hover {
+    transform: translateY(-3px) scale(1.02);
+    border-color: rgba(243, 82, 255, 0.6);
+    box-shadow: 
+      0 12px 30px rgba(243, 82, 255, 0.25),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+
+  /* 3D perspective utilities */
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  .transform-gpu {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  /* Enhanced gradient utilities */
+  .bg-gradient-radial {
+    background: radial-gradient(circle at center, var(--tw-gradient-stops));
+  }
+
+  .text-shadow-glow {
+    text-shadow: 
+      0 0 20px currentColor,
+      0 0 40px currentColor,
+      0 0 60px currentColor;
+  }
+
+  /* Animation for stats */
+  .hero-stats {
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  /* Responsive optimizations */
+  @media (max-width: 768px) {
+    .hero-glass-card {
+      padding: 1.5rem !important;
+    }
+    
+    h1 {
+      font-size: 2.25rem !important;
+      line-height: 1.1 !important;
+    }
+    
+    .cta-primary,
+    .cta-secondary {
+      padding: 1rem 2rem !important;
+      font-size: 1rem !important;
+    }
+    
+    /* Reduce particle effects on mobile for performance */
+    .particle-primary,
+    .particle-secondary,
+    .particle-micro {
+      animation-duration: 12s;
+      opacity: 0.4;
+    }
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .parallax-layer,
+    .particle-primary,
+    .particle-secondary,
+    .particle-micro {
+      animation: none !important;
+      transform: none !important;
+    }
+    
+    .cta-primary {
+      animation: none !important;
+    }
+  }
+
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    .hero-glass-card {
+      background: rgba(0, 0, 0, 0.8);
+      border: 2px solid white;
+    }
+    
+    .particle-primary,
+    .particle-secondary,
+    .particle-micro {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  /*
+  ═══════════════════════════════════════════════════════════════════════════════
+  🚀 ENHANCED PARALLAX HERO CONTROLLER
+  ═══════════════════════════════════════════════════════════════════════════════
+  
+  Features:
+  - Performance-optimized multi-layer parallax
+  - Smart viewport detection and optimization
+  - Staggered animation timeline with cubic-bezier easing
+  - Touch and mobile optimizations
+  - Reduced motion respect
+  - Memory leak prevention
+  
+  ═══════════════════════════════════════════════════════════════════════════════
+  */
+  
+  document.addEventListener('DOMContentLoaded', function() {
+    // Performance and device detection
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isHighPerformance = navigator.hardwareConcurrency >= 4;
+    
+    // Parallax system with enhanced performance
+    let ticking = false;
+    let lastScrollY = 0;
+    const parallaxLayers = document.querySelectorAll('.parallax-layer');
+    
+    function updateParallax() {
+      const scrollY = window.pageYOffset;
+      const viewportHeight = window.innerHeight;
+      const heroSection = document.querySelector('#home');
+      const heroRect = heroSection.getBoundingClientRect();
+      
+      // Only update if hero is in viewport for performance
+      if (heroRect.bottom >= 0 && heroRect.top <= viewportHeight) {
+        parallaxLayers.forEach(layer => {
+          const speed = parseFloat(layer.dataset.speed) || 0.5;
+          const yPos = -(scrollY * speed);
+          
+          // Use transform3d for hardware acceleration
+          layer.style.transform = `translate3d(0, ${yPos}px, 0)`;
+        });
+      }
+      
+      lastScrollY = scrollY;
+      ticking = false;
+    }
+    
+    function requestParallaxUpdate() {
+      if (!ticking && !prefersReducedMotion) {
+        requestAnimationFrame(updateParallax);
+        ticking = true;
+      }
+    }
+    
+    // Enhanced scroll listener with throttling
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+      requestParallaxUpdate();
+      
+      // Additional optimization: reduce scroll listener frequency on mobile
+      if (isMobile) {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(requestParallaxUpdate, 16); // ~60fps
+      }
+    }, { passive: true });
+    
+    // Advanced Hero Content Animation Timeline
+    function createAnimationTimeline() {
+      const elements = {
+        texts: document.querySelectorAll('.hero-text-1, .hero-text-2, .hero-text-3'),
+        subtitle: document.querySelector('.hero-subtitle'),
+        cta: document.querySelector('.hero-cta'),
+        stats: document.querySelector('.hero-stats'),
+        scrollIndicator: document.querySelector('.scroll-indicator')
+      };
+      
+      // Enhanced cubic-bezier easing for professional feel
+      const ease = 'cubic-bezier(0.16, 1, 0.3, 1)'; // Custom easing
+      
+      // Staggered text animation with individual transforms
+      elements.texts.forEach((text, index) => {
+        setTimeout(() => {
+          text.style.opacity = '1';
+          text.style.transform = 'translateY(0) scale(1)';
+          text.style.transition = `all 1.2s ${ease}`;
+          
+          // Add subtle glow effect for the gradient text
+          if (text.classList.contains('hero-text-2')) {
+            setTimeout(() => {
+              text.style.filter = 'drop-shadow(0 0 20px rgba(243, 82, 255, 0.3))';
+            }, 300);
+          }
+        }, 300 + (index * 200));
+      });
+      
+      // Subtitle with typewriter-like reveal
+      setTimeout(() => {
+        elements.subtitle.style.opacity = '1';
+        elements.subtitle.style.transform = 'translateY(0)';
+        elements.subtitle.style.transition = `all 1s ${ease}`;
+      }, 1100);
+      
+      // CTA buttons with bounce effect
+      setTimeout(() => {
+        elements.cta.style.opacity = '1';
+        elements.cta.style.transform = 'translateY(0) scale(1)';
+        elements.cta.style.transition = `all 1s ${ease}`;
+      }, 1400);
+      
+      // Stats counter animation
+      setTimeout(() => {
+        if (elements.stats) {
+          elements.stats.style.opacity = '1';
+          elements.stats.style.transform = 'translateY(0)';
+          elements.stats.style.transition = `all 0.8s ${ease}`;
+          
+          // Animated counter effect
+          const counters = elements.stats.querySelectorAll('[class*="font-bold"]');
+          counters.forEach(counter => {
+            const target = parseInt(counter.textContent);
+            let current = 0;
+            const increment = target / 30; // 30 frames animation
+            
+            function updateCounter() {
+              current += increment;
+              if (current < target) {
+                counter.textContent = Math.floor(current) + '+';
+                requestAnimationFrame(updateCounter);
+              } else {
+                counter.textContent = target + '+';
+              }
+            }
+            
+            setTimeout(updateCounter, 200);
+          });
+        }
+      }, 1700);
+      
+      // Scroll indicator with pulse
+      setTimeout(() => {
+        elements.scrollIndicator.style.opacity = '1';
+        elements.scrollIndicator.style.transition = 'all 1s ease';
+      }, 2000);
+    }
+    
+    // Intersection Observer for trigger optimization
+    const heroObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && entry.intersectionRatio > 0.3) {
+          createAnimationTimeline();
+          heroObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.3,
+      rootMargin: '0px 0px -50px 0px'
+    });
+    
+    const heroSection = document.querySelector('#home');
+    heroObserver.observe(heroSection);
+    
+    // Enhanced button interactions
+    const ctaButtons = document.querySelectorAll('.cta-primary, .cta-secondary');
+    ctaButtons.forEach(button => {
+      // Mouse tracking for 3D effect
+      button.addEventListener('mousemove', function(e) {
+        if (!isMobile) {
+          const rect = this.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          
+          const rotateX = (y - centerY) / 10;
+          const rotateY = (centerX - x) / 10;
+          
+          this.style.transform = `translateY(-4px) scale(1.02) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        }
+      });
+      
+      button.addEventListener('mouseleave', function() {
+        this.style.transform = '';
+        this.style.filter = '';
+      });
+      
+      button.addEventListener('mouseenter', function() {
+        this.style.filter = 'brightness(1.1) saturate(1.3)';
+      });
+      
+      // Enhanced click effect
+      button.addEventListener('click', function(e) {
+        // Create ripple effect
+        const ripple = document.createElement('div');
+        const rect = this.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        const x = e.clientX - rect.left - size / 2;
+        const y = e.clientY - rect.top - size / 2;
+        
+        ripple.style.cssText = `
+          position: absolute;
+          width: ${size}px;
+          height: ${size}px;
+          left: ${x}px;
+          top: ${y}px;
+          background: radial-gradient(circle, rgba(255,255,255,0.6) 0%, transparent 70%);
+          border-radius: 50%;
+          transform: scale(0);
+          animation: ripple 0.6s ease-out;
+          pointer-events: none;
+          z-index: 1;
+        `;
+        
+        this.appendChild(ripple);
+        
+        setTimeout(() => {
+          ripple.remove();
+        }, 600);
+      });
+    });
+    
+    // Smooth scroll enhancement
+    const scrollIndicator = document.querySelector('.scroll-indicator');
+    scrollIndicator.addEventListener('click', () => {
+      const nextSection = document.querySelector('#home').nextElementSibling;
+      if (nextSection) {
+        nextSection.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+    
+    // Device-specific optimizations
+    if (isMobile) {
+      // Reduce parallax intensity for mobile performance
+      parallaxLayers.forEach(layer => {
+        const currentSpeed = parseFloat(layer.dataset.speed);
+        layer.dataset.speed = currentSpeed * 0.3;
+      });
+      
+      // Disable complex animations on older mobile devices
+      if (!isHighPerformance) {
+        document.querySelectorAll('.particle-primary, .particle-secondary, .particle-micro').forEach(particle => {
+          particle.style.animationDuration = '20s';
+          particle.style.opacity = '0.3';
+        });
+      }
+    }
+    
+    // Memory cleanup on page unload
+    window.addEventListener('beforeunload', () => {
+      heroObserver.disconnect();
+      window.removeEventListener('scroll', requestParallaxUpdate);
+    });
+    
+    // Dynamic particle creation for high-end devices
+    if (isHighPerformance && !isMobile && !prefersReducedMotion) {
+      function createDynamicParticle() {
+        const particle = document.createElement('div');
+        particle.className = 'particle-micro';
+        particle.style.cssText = `
+          position: absolute;
+          left: ${Math.random() * 100}%;
+          top: ${Math.random() * 100}%;
+          animation-delay: ${Math.random() * 5}s;
+          opacity: ${0.3 + Math.random() * 0.4};
+        `;
+        
+        document.querySelector('.absolute.inset-0.z-10').appendChild(particle);
+        
+        setTimeout(() => {
+          particle.remove();
+        }, 10000);
+      }
+      
+      // Create new particles periodically
+      setInterval(createDynamicParticle, 3000);
+    }
+  });
+</script>
