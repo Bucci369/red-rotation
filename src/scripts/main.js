@@ -56,17 +56,17 @@ document.addEventListener('DOMContentLoaded', function() {
         scrollObserver.observe(el);
     });
     
-    // === STICKY HERO & PARALLAX ZOOM ===
+    // === FINALE LOGIK FÜR HERO-ANIMATIONEN ===
     const pinContainer = document.querySelector('.pin-container');
-    const heroSection = document.querySelector('.sticky-hero');
     const parallaxBg = document.getElementById('parallax-bg');
     const parallaxFg = document.getElementById('parallax-fg');
+    const lightElement = document.getElementById('hero-light');
+    const heroSection = document.getElementById('hero');
 
-    if (pinContainer && heroSection && parallaxBg && parallaxFg) {
-        let ticking = false;
-
+    if (pinContainer && parallaxBg && parallaxFg && lightElement && heroSection) {
+        
+        // --- PINNING & ZOOM LOGIK ---
         const updatePinnedAnimation = () => {
-            const rect = pinContainer.getBoundingClientRect();
             const scrollTop = window.pageYOffset;
             const pinStart = pinContainer.offsetTop;
             const pinDuration = pinContainer.offsetHeight - window.innerHeight;
@@ -74,23 +74,43 @@ document.addEventListener('DOMContentLoaded', function() {
             if (scrollTop >= pinStart && scrollTop <= pinStart + pinDuration) {
                 const progress = (scrollTop - pinStart) / pinDuration;
                 
+                // 1. Hintergrund zoomt (von 100% auf 130%)
                 const bgScale = 1 + progress * 0.3;
                 parallaxBg.style.transform = `scale(${bgScale})`;
 
-                const fgTranslateY = progress * 20; 
-                parallaxFg.style.transform = `translateY(-${fgTranslateY}px) translateX(-50%)`;
+                // 2. Vordergrund zoomt minimal mit und wird leicht nach unten geschoben, um auf dem Boden zu bleiben
+                const fgScale = 1 + progress * 0.05; // Zoomt nur 5%
+                const fgTranslateY = progress * 50; // Verschiebt sich 50px nach unten
+                parallaxFg.style.transform = `scale(${fgScale}) translateY(${fgTranslateY}px)`;
             }
-            
-            ticking = false;
         };
 
+        // --- LICHTKEGEL LOGIK ---
+        const updateLightPosition = (e) => {
+            const rect = heroSection.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            lightElement.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%) scale(1)`;
+        };
+        heroSection.addEventListener('mouseenter', () => lightElement.style.transform = lightElement.style.transform.replace('scale(0)', 'scale(1)'));
+        heroSection.addEventListener('mouseleave', () => lightElement.style.transform = lightElement.style.transform.replace('scale(1)', 'scale(0)'));
+        heroSection.addEventListener('mousemove', updateLightPosition);
+
+        // --- ALLES IN EINEM EVENT LISTENER FÜR PERFORMANCE ---
+        let ticking = false;
         window.addEventListener('scroll', () => {
             if (!ticking) {
-                window.requestAnimationFrame(updatePinnedAnimation);
+                window.requestAnimationFrame(() => {
+                    updatePinnedAnimation();
+                    ticking = false;
+                });
                 ticking = true;
             }
         }, { passive: true });
     }
+
+    // ... (restliche Skripte wie Video Player etc. bleiben unverändert) ...
+});
 
     // === SMART VIDEO PLAYBACK ===
     const smartVideos = document.querySelectorAll('[data-smart-video]');
@@ -107,4 +127,5 @@ document.addEventListener('DOMContentLoaded', function() {
         }, { threshold: 0.5 });
         smartVideos.forEach((video) => videoObserver.observe(video));
     }
-});
+
+

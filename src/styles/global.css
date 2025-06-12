@@ -105,9 +105,7 @@ body.menu-open {
     transition: color 0.3s ease;
 }
 
-.nav-links a:hover {
-    color: var(--accent-gold);
-}
+
 
 /* --- Mobile Menu --- */
 #mobile-menu-btn {
@@ -179,9 +177,7 @@ body.menu-open {
     transition: color 0.3s ease;
 }
 
-#mobile-menu a:hover {
-    color: var(--accent-gold);
-}
+
 
 
 /* === HERO SECTION === */
@@ -196,13 +192,15 @@ body.menu-open {
 
 .parallax-container {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     z-index: 1;
     overflow: hidden;
+
+    /* ...und füge diese zwei Zeilen HIER ein: */
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
 }
+
 
 .parallax-bg {
     position: absolute;
@@ -220,21 +218,28 @@ body.menu-open {
 }
 
 
-.parallax-fg {
+#parallax-fg { /* WIR BENUTZEN DAS # FÜR DIE ID -> HÖCHSTE PRIORITÄT */
     position: absolute;
     top: -7.5%;
-    left: -10%;
-    width: 120%;
+
+    /* Hier kannst du jetzt sicher die Grösse anpassen */
+    left: -20%;
+    width: 140%;
+    
     height: 120%;
-    /* NEUES VORDERGRUNDBILD */
-    background-image: url('/images/mann_vordergrund.png'); 
+    background-image: url('/images/mann_vordergrund.png');
     background-size: contain;
     background-position: center bottom;
     background-repeat: no-repeat;
     will-change: transform;
-    z-index: 2;
+    transform-origin: center bottom;
+    z-index: 3;
     filter: brightness(0.8) contrast(1.2);
+    /* === NEU: SANFTE KANTEN AN DEN SEITEN HINZUFÜGEN === */
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%);
 }
+
 
 .parallax-bg {
     /* ... (deine bisherigen Stile) ... */
@@ -391,9 +396,6 @@ body.menu-open {
     transition: transform 0.4s ease;
 }
 
-.landscape-item:hover .landscape-overlay {
-    transform: translateY(0);
-}
 
 .landscape-title {
     font-size: 1.5rem;
@@ -651,17 +653,77 @@ body.menu-open {
 
 /* === STICKY PINNING CONTAINER === */
 .pin-container {
-  /* Die Höhe bestimmt, WIE LANGE der Nutzer scrollen muss, während der Effekt läuft.
-     200vh = die Höhe von 2 Bildschirmen. Erhöhe diesen Wert für eine längere Animation. */
-  height: 200vh;
+  height: 200vh; /* Scroll-Dauer der Animation */
   position: relative;
   width: 100%;
 }
-
 .sticky-hero {
-  /* Das ist die Magie: Die Sektion klebt oben am Bildschirm, solange der .pin-container im Bild ist */
   position: sticky;
   top: 0;
-  height: 100vh; /* Die Sektion selbst füllt immer den ganzen Bildschirm */
+  height: 100vh;
   overflow: hidden;
+}
+
+/* === PARALLAX & LICHTKEGEL-AUFBAU === */
+.parallax-container {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 1; /* Liegt ganz hinten */
+}
+
+/* Hintergrund (Himmel) */
+.parallax-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('/images/himmel_hintergrund.jpg');
+    background-size: cover; 
+    background-position: center;
+    will-change: transform;
+    transform-origin: center center;
+    z-index: 1;
+}
+
+/* Vordergrund (Auto) - Deine "perfekte" statische Positionierung */
+.parallax-fg {
+    position: absolute;
+    top: -7.5%;
+    left: -10%;
+    width: 120%;
+    height: 120%;
+    background-image: url('/images/mann_vordergrund.png'); 
+    background-size: contain;
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    will-change: transform;
+    transform-origin: center bottom; /* Wichtig für die Animation */
+    z-index: 3; /* Liegt über dem Overlay und dem Licht */
+}
+
+/* Dunkle Tönung */
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.1) 70%, rgba(0, 0, 0, 0.3) 100%);
+    z-index: 2; /* Liegt zwischen Himmel und Auto */
+}
+
+/* Lichtkegel */
+#hero-light {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 60%);
+    border-radius: 50%;
+    pointer-events: none; 
+    transition: transform 0.1s ease-out; 
+    will-change: transform;
+    z-index: 2; /* Liegt auf derselben Ebene wie die Tönung */
+    transform: scale(0); /* Startet unsichtbar */
+}
+
+/* Text-Inhalt */
+.hero-content {
+    position: relative;
+    z-index: 10; /* Liegt über allem */
 }
