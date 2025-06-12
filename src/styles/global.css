@@ -216,7 +216,7 @@ body.menu-open {
     position: absolute;
     width: 100%;
     height: 100%;
-    background-image: url('/images/mann_vordergrund.png');
+    background-image: url('/images/mann_vordergrund.avif');
     background-repeat: no-repeat;
     will-change: transform;
     transform-origin: center bottom;
