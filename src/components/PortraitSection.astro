@@ -1,28 +1,29 @@
 ---
-// Wir benutzen die gleiche intelligente Logik hier
-export interface Item {
-    type: 'image' | 'video';
-    src: string;
+// src/components/PortraitSection.astro
+import type { ImageMetadata } from 'astro';
+
+interface PortraitItem {
+    type: 'image';
+    src: string | ImageMetadata;
     alt: string;
 }
-export interface Props {
-    items: ReadonlyArray<Item>;
+
+interface Props {
+    items: readonly PortraitItem[];
 }
+
 const { items } = Astro.props;
 ---
-<section class="portraits section" id="portraits">
-    <h2 class="section-title serif scroll-reveal">Portraits</h2>
+
+<section id="portrait" class="section">
+    <h2 class="section-title serif scroll-reveal">Portrait-Fotografie</h2>
     <div class="portrait-masonry">
         {items.map((item, index) => (
-            <div class={`portrait-item portfolio-item-reveal stagger-${index + 1}`}>
-                 {item.type === 'video' ? (
-                    <video autoplay loop muted playsinline class="portfolio-video" data-smart-video>
-                        <source src={item.src} type="video/mp4" />
-                    </video>
-                ) : (
-                    <img src={item.src} alt={item.alt} loading="lazy" decoding="async" />
+            <div class={`portrait-item scroll-reveal stagger-${(index % 6) + 1}`}>
+                {item.type === 'image' && (
+                    <img src={item.src} alt={item.alt} loading="lazy" />
                 )}
-            </div>
+                </div>
         ))}
     </div>
 </section>

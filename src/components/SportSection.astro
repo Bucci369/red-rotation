@@ -14,7 +14,7 @@ const { items } = Astro.props;
     <h2 class="section-title serif scroll-reveal">Sport & Lifestyle</h2>
     <div class="sport-grid">
         {items.map((item, index) => (
-            <div class={`sport-item portfolio-item-reveal stagger-${index + 1}`}>
+            <div class={`sport-item scroll-reveal stagger-${(index % 6) + 1}`}>
                 {item.type === 'video' ? (
                     <video autoplay loop muted playsinline class="portfolio-video" data-smart-video>
                         <source src={item.src} type="video/mp4" />
