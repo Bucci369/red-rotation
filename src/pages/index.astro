@@ -1,10 +1,8 @@
 ---
-// src/pages/index.astro (FINALE KORREKTUR)
-
-// Layout & Komponenten importieren (Das bleibt gleich)
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Hero from '../components/Hero.astro';
+import AboutSection from '../components/AboutSection.astro';
 import LandscapeSection from '../components/LandscapeSection.astro';
 import PortraitSection from '../components/PortraitSection.astro';
 import SportSection from '../components/SportSection.astro';
@@ -12,44 +10,50 @@ import VideoBuffer from '../components/VideoBuffer.astro';
 import ContactSection from '../components/ContactSection.astro';
 import Footer from '../components/Footer.astro';
 
-// KEINE BILD-IMPORTS MEHR!
-// Wir definieren die Pfade als einfachen Text.
-// Der Pfad beginnt mit "/", was auf den "public" Ordner verweist.
+// --- DATEN FÜR DIE PORTFOLIO-SEKTIONEN ---
 
-const landscapeImages = [
-    { src: "/images/image_Berge.JPG", alt: "Berglandschaft", title: "Alpine Majestät", desc: "Dramatische Berglandschaften" },
-    { src: "/images/image_Bergemitstraße.JPG", alt: "Bergstraße", title: "Serpentinen", desc: "Winding roads through majestic peaks" },
-    { src: "/images/image_schnee mit baum.JPG", alt: "Winterlandschaft", title: "Winterstille", desc: "Peaceful winter morning" },
-    { src: "/images/image_tal_mit_bergen.png", alt: "Tal mit Bergen", title: "Weite Täler", desc: "Endless valley panoramas" },
-    { src: "/images/image_landscape.PNG", alt: "Landschaftspanorama", title: "Horizonte", desc: "Where earth meets sky" },
-    { src: "/images/image_schnee mit baum und person.png", alt: "Schnee mit Person", title: "Einsamkeit", desc: "Solitude in the snow" },
-];
+const landscapeItems = [
+    { type: 'image', src: "/images/image_Berge.webp", alt: "Berglandschaft", title: "Alpine Majestät", desc: "Dramatische Berglandschaften" },
+    { type: 'image', src: "/images/image_Bergemitstraße.webp", alt: "Bergstraße", title: "Serpentinen", desc: "Winding roads through majestic peaks" },
+    {
+        type: 'video',
+        src: "/videos/video_von_bergen.mp4",
+        poster: "/images/image_tal_mit_bergen.png",
+        alt: "Tal mit Bergen",
+        title: "Weite Täler",
+        desc: "Endless valley panoramas"
+    },
+    { type: 'image', src: "/images/image_landscape.webp", alt: "Landschaftspanorama", title: "Horizonte", desc: "Where earth meets sky" },
+    { type: 'image', src: "/images/image_schnee mit baum und person.webp", alt: "Schnee mit Person", title: "Einsamkeit", desc: "Solitude in the snow" },
+    { type: 'image', src: "/images/image_schnee mit baum.webp", alt: "Winterlandschaft", title: "Winterstille", desc: "Peaceful winter morning" }
+] as const;
 
-const portraitImagePaths = [
-    "/images/image_Frau_Felder.JPG",
-    "/images/image_Frau_Sonne.png",
-    "/images/image_frau.PNG",
-    "/images/image_frau2.PNG",
-    "/images/image_mann.PNG",
-    "/images/image_schnee mit person_rotejacke.png"
-];
+const portraitItems = [
+    { type: 'image', src: "/images/image_Frau_Felder.JPG", alt: "Portrait einer Frau auf einem Feld" },
+    { type: 'image', src: "/images/image_Frau_Sonne.png", alt: "Portrait einer Frau im Sonnenuntergang" },
+    { type: 'image', src: "/images/image_frau.png", alt: "Studioportrait einer Frau" },
+    { type: 'image', src: "/images/image_frau2.png", alt: "Schwarz-Weiss-Portrait einer Frau" },
+    { type: 'image', src: "/images/image_mann.png", alt: "Portrait eines Mannes" },
+    { type: 'image', src: "/images/image_schnee mit person_rotejacke.webp", alt: "Person im Schnee" }
+] as const;
 
-const sportImagePaths = [
-    "/images/image_frau_beim_sport_laufen.png",
-    "/images/image_foto_fitnesstudio.png",
-    "/images/image_fotoshooting.png"
-];
+const sportItems = [
+    { type: 'image', src: "/images/image_frau_beim_sport_laufen.avif", alt: "Frau beim Laufen" },
+    { type: 'image', src: "/images/image_foto_fitnesstudio.avif", alt: "Mann im Fitnessstudio" },
+    { type: 'image', src: "/images/image_fotoshooting.avif", alt: "Model bei einem Fotoshooting" }
+] as const;
 ---
 
 <Layout>
     <Navbar />
     <main>
         <Hero />
-        <LandscapeSection images={landscapeImages} />
+        <AboutSection />
+        <LandscapeSection items={landscapeItems} />
         <VideoBuffer videoSrc="/videos/video_von_bergen.mp4" quote="Jeder Moment ist einzigartig – ich halte ihn für die Ewigkeit fest." author="Red Rotation" />
-        <PortraitSection images={portraitImagePaths} />
+        <PortraitSection items={portraitItems} />
         <VideoBuffer videoSrc="/videos/video_von_bergen und wald.mp4" quote="In der Stille der Natur finden wir die lautesten Geschichten." author="Philosophie der Fotografie" />
-        <SportSection images={sportImagePaths} />
+        <SportSection items={sportItems} />
         <ContactSection />
     </main>
     <Footer />

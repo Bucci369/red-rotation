@@ -1,27 +1,22 @@
 ---
-// About Section mit 3D Touch Elements und Mikrointeraktionen
+// Dies ist der "Frontmatter"-Bereich, hier ist für diese Komponente nichts notwendig.
 ---
 
-<section id="about" class="py-20 lg:py-32 bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-800 dark:via-gray-900 dark:to-black relative overflow-hidden">
-  <!-- Background Elements -->
-  <div class="absolute inset-0 opacity-30 dark:opacity-20">
-    <div class="absolute top-1/4 left-0 w-96 h-96 bg-gradient-to-r from-dopamine-500/20 to-electric-500/20 rounded-full filter blur-3xl animate-pulse"></div>
-    <div class="absolute bottom-1/4 right-0 w-96 h-96 bg-gradient-to-l from-electric-500/20 to-dopamine-500/20 rounded-full filter blur-3xl animate-pulse" style="animation-delay: 2s;"></div>
+<section id="about" class="py-20 lg:py-32 bg-gradient-to-br from-[var(--black)] via-[var(--black)] to-[var(--black)] relative overflow-hidden">  <div class="absolute inset-0 opacity-30 dark:opacity-20">
+    <div class="absolute top-1/4 left-0 w-96 h-96 bg-gradient-to-r from-[var(--accent-gold)]/[var(--shadow-soft)] to-[var(--accent-silver)]/[var(--shadow-soft)] rounded-full filter blur-3xl animate-pulse"></div>
+    <div class="absolute bottom-1/4 right-0 w-96 h-96 bg-gradient-to-l from-[var(--accent-silver)]/[var(--shadow-soft)] to-[var(--accent-gold)]/[var(--shadow-soft)] rounded-full filter blur-3xl animate-pulse" style="animation-delay: 2s;"></div>
   </div>
 
   <div class="container mx-auto px-6 lg:px-8 relative z-10">
     <div class="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center max-w-7xl mx-auto">
-      
-      <!-- Left Column - Image & 3D Cards -->
+
       <div class="relative">
-        <!-- Main Portrait -->
         <div class="main-portrait-container group">
           <div class="portrait-card perspective-1000">
             <div class="portrait-inner">
-              <!-- Front -->
               <div class="portrait-front">
-                <img 
-                  src="/src/assets/images/image_frau.PNG" 
+                <img
+                  src="/public/images/image_frau.PNG"
                   alt="Photographer Portrait"
                   class="w-full h-full object-cover rounded-2xl"
                   loading="lazy"
@@ -35,10 +30,9 @@
                   </div>
                 </div>
               </div>
-              
-              <!-- Back -->
+
               <div class="portrait-back">
-                <div class="h-full flex items-center justify-center p-8 bg-gradient-to-br from-dopamine-500 to-electric-500 rounded-2xl">
+                <div class="h-full flex items-center justify-center p-8 bg-gradient-to-br from-[var(--accent-gold)] to-[var(--accent-silver)] rounded-2xl">
                   <div class="text-white text-center">
                     <svg class="w-16 h-16 mx-auto mb-4 opacity-80" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
@@ -52,34 +46,29 @@
           </div>
         </div>
 
-        <!-- Floating Stats Cards -->
         <div class="floating-stats">
-          <!-- Card 1 -->
           <div class="stat-card stat-card-1" data-tilt>
             <div class="stat-content">
-              <div class="stat-number text-dopamine-500">500+</div>
+              <div class="stat-number text-[var(--accent-gold)]">500+</div>
               <div class="stat-label">Happy Clients</div>
             </div>
           </div>
-          
-          <!-- Card 2 -->
+
           <div class="stat-card stat-card-2" data-tilt>
             <div class="stat-content">
-              <div class="stat-number text-electric-500">1000+</div>
+              <div class="stat-number text-[var(--accent-silver)]">1000+</div>
               <div class="stat-label">Projects</div>
             </div>
           </div>
-          
-          <!-- Card 3 -->
+
           <div class="stat-card stat-card-3" data-tilt>
             <div class="stat-content">
-              <div class="stat-number text-dopamine-500">15</div>
+              <div class="stat-number text-[var(--accent-gold)]">15</div>
               <div class="stat-label">Awards</div>
             </div>
           </div>
         </div>
 
-        <!-- Equipment Icons -->
         <div class="equipment-icons">
           <div class="equipment-icon" data-tooltip="Canon EOS R5" style="--delay: 0s;">
             <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
@@ -100,81 +89,32 @@
         </div>
       </div>
 
-      <!-- Right Column - Content -->
       <div class="space-y-8 about-content opacity-0 translate-x-8">
-        <!-- Section Header -->
         <div>
           <h2 class="text-5xl lg:text-7xl font-serif font-bold mb-6 leading-tight">
-            <span class="block text-gray-900 dark:text-white">Über</span>
-            <span class="block bg-gradient-to-r from-dopamine-500 to-electric-500 bg-clip-text text-transparent">mich</span>
+            <span class="block text-[var(--white)]">Über</span>
+            <span class="block bg-gradient-to-r from-[var(--accent-gold)] to-[var(--accent-silver)] bg-clip-text text-transparent">mich</span>
           </h2>
-          
-          <div class="w-24 h-1 bg-gradient-to-r from-dopamine-500 to-electric-500 rounded-full mb-8"></div>
+
+          <div class="w-24 h-1 bg-gradient-to-r from-[var(--accent-gold)] to-[var(--accent-silver)] rounded-full mb-8"></div>
         </div>
 
-        <!-- Biography -->
         <div class="prose prose-lg prose-gray dark:prose-invert max-w-none">
-          <p class="text-xl text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
-            Hallo! Ich bin <span class="text-dopamine-600 dark:text-dopamine-400 font-semibold">ein leidenschaftlicher Fotograf</span> 
-            mit über 5 Jahren Erfahrung in der visuellen Geschichten erzählung. Meine Reise begann mit einer einfachen Kamera 
+          <p class="text-xl text-[var(--light-gray)] leading-relaxed mb-6">
+            Hallo! Ich bin <span class="text-[var(--accent-gold)] font-semibold">ein leidenschaftlicher Fotograf</span>
+            mit über 5 Jahren Erfahrung in der visuellen Geschichten erzählung. Meine Reise begann mit einer einfachen Kamera
             und der Faszination für das perfekte Licht.
           </p>
-          
-          <p class="text-lg text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
-            Spezialisiert auf <span class="font-semibold">Landschafts-, Portrait- und Sportfotografie</span>, 
-            bringe ich eine einzigartige Perspektive in jedes Projekt ein. Jeder Moment ist einzigartig, 
+
+          <p class="text-lg text-[var(--light-gray)] leading-relaxed mb-6">
+            Spezialisiert auf <span class="font-semibold">Landschafts-, Portrait- und Sportfotografie</span>,
+            bringe ich eine einzigartige Perspektive in jedes Projekt ein. Jeder Moment ist einzigartig,
             und es ist meine Mission, diese Einzigartigkeit einzufangen.
           </p>
         </div>
 
-        <!-- Skills Progress Bars -->
-        <div class="skills-section">
-          <h3 class="text-2xl font-serif font-bold mb-6 text-gray-900 dark:text-white">Expertise</h3>
-          
-          <div class="space-y-6">
-            <div class="skill-item">
-              <div class="flex justify-between mb-2">
-                <span class="font-medium text-gray-700 dark:text-gray-300">Landschaftsfotografie</span>
-                <span class="text-dopamine-600 dark:text-dopamine-400 font-semibold">95%</span>
-              </div>
-              <div class="skill-bar">
-                <div class="skill-progress" data-width="95%" style="--delay: 0s;"></div>
-              </div>
-            </div>
-            
-            <div class="skill-item">
-              <div class="flex justify-between mb-2">
-                <span class="font-medium text-gray-700 dark:text-gray-300">Portraitfotografie</span>
-                <span class="text-electric-600 dark:text-electric-400 font-semibold">90%</span>
-              </div>
-              <div class="skill-bar">
-                <div class="skill-progress electric" data-width="90%" style="--delay: 0.2s;"></div>
-              </div>
-            </div>
-            
-            <div class="skill-item">
-              <div class="flex justify-between mb-2">
-                <span class="font-medium text-gray-700 dark:text-gray-300">Bildbearbeitung</span>
-                <span class="text-dopamine-600 dark:text-dopamine-400 font-semibold">98%</span>
-              </div>
-              <div class="skill-bar">
-                <div class="skill-progress" data-width="98%" style="--delay: 0.4s;"></div>
-              </div>
-            </div>
-            
-            <div class="skill-item">
-              <div class="flex justify-between mb-2">
-                <span class="font-medium text-gray-700 dark:text-gray-300">Videografie</span>
-                <span class="text-electric-600 dark:text-electric-400 font-semibold">85%</span>
-              </div>
-              <div class="skill-bar">
-                <div class="skill-progress electric" data-width="85%" style="--delay: 0.6s;"></div>
-              </div>
-            </div>
-          </div>
-        </div>
+        
 
-        <!-- Call to Action -->
         <div class="pt-8">
           <button class="about-cta-btn group">
             <span>Lerne mich kennen</span>
@@ -213,9 +153,10 @@
     transform-style: preserve-3d;
   }
 
-  .main-portrait-container:hover .portrait-inner {
+  /* Hier brauchen wir keine Hover-Farbanpassung, da es ein Transform ist */
+  /* .main-portrait-container:hover .portrait-inner {
     transform: rotateY(180deg);
-  }
+  } */
 
   .portrait-front, .portrait-back {
     position: absolute;
@@ -224,7 +165,7 @@
     backface-visibility: hidden;
     border-radius: 1rem;
     overflow: hidden;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15); /* Schatten beibehalten */
   }
 
   .portrait-back {
@@ -257,21 +198,25 @@
     position: absolute;
     width: 120px;
     height: 80px;
-    background: rgba(255, 255, 255, 0.95);
+    /* Hintergrund und Border anpassen */
+    background: rgba(0, 0, 0, 0.8); /* Dunklerer Hintergrund */
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Weniger auffällige Border */
     border-radius: 1rem;
     padding: 1rem;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2); /* Schatten beibehalten */
     transition: all 0.3s ease;
     pointer-events: auto;
     cursor: pointer;
   }
 
+  /* Der dark-Modus Stil in der Komponente ist jetzt überflüssig,
+     da wir den Standard-Stil bereits angepasst haben.
   .dark .stat-card {
     background: rgba(0, 0, 0, 0.8);
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
+  */
 
   .stat-card-1 {
     top: 20%;
@@ -295,7 +240,7 @@
 
   .stat-card:hover {
     transform: translateY(-10px) scale(1.05);
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3); /* Etwas dunklerer Schatten beim Hover */
   }
 
   .stat-content {
@@ -314,13 +259,15 @@
 
   .stat-label {
     font-size: 0.75rem;
-    color: #6b7280;
+    color: var(--medium-gray); /* Angepasst */
     margin-top: 0.25rem;
   }
 
+  /* Der dark-Modus Stil in der Komponente ist jetzt überflüssig.
   .dark .stat-label {
     color: #9ca3af;
   }
+  */
 
   /* Equipment Icons */
   .equipment-icons {
@@ -336,30 +283,33 @@
   .equipment-icon {
     width: 60px;
     height: 60px;
-    background: rgba(255, 255, 255, 0.9);
+    /* Hintergrund und Border angepasst */
+    background: rgba(0, 0, 0, 0.8); /* Dunklerer Hintergrund */
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Weniger auffällige Border */
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #6b7280;
+    color: var(--light-gray); /* Angepasst */
     cursor: pointer;
     transition: all 0.3s ease;
     animation: slideUp 0.6s ease calc(var(--delay)) both;
     position: relative;
   }
 
+  /* Der dark-Modus Stil in der Komponente ist jetzt überflüssig.
   .dark .equipment-icon {
     background: rgba(0, 0, 0, 0.8);
     border: 1px solid rgba(255, 255, 255, 0.1);
     color: #9ca3af;
   }
+  */
 
   .equipment-icon:hover {
     transform: translateY(-5px) scale(1.1);
-    color: #f352ff;
-    box-shadow: 0 15px 30px rgba(243, 82, 255, 0.3);
+    color: var(--accent-gold); /* Akzentfarbe angepasst */
+    box-shadow: 0 15px 30px var(--shadow-deep); /* Schattenfarbe anpassen */
   }
 
   @keyframes slideUp {
@@ -399,14 +349,14 @@
   .skill-bar {
     width: 100%;
     height: 8px;
-    background: rgba(156, 163, 175, 0.2);
+    background: rgba(255, 255, 255, 0.1); /* Hellere Bar auf dunklem Hintergrund */
     border-radius: 4px;
     overflow: hidden;
   }
 
   .skill-progress {
     height: 100%;
-    background: linear-gradient(90deg, #f352ff, #e920ff);
+    background: linear-gradient(90deg, var(--accent-gold), var(--accent-silver)); /* Akzentfarben angepasst */
     border-radius: 4px;
     width: 0%;
     transition: width 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -415,7 +365,7 @@
   }
 
   .skill-progress.electric {
-    background: linear-gradient(90deg, #00d9ff, #00bfff);
+    background: linear-gradient(90deg, var(--accent-silver), var(--accent-gold)); /* Akzentfarben angepasst */
   }
 
   .skill-progress::after {
@@ -436,7 +386,9 @@
 
   /* CTA Button */
   .about-cta-btn {
-    @apply px-8 py-4 bg-gradient-to-r from-dopamine-500 to-electric-500 text-white rounded-full font-semibold transition-all duration-300 flex items-center relative overflow-hidden;
+    /* Tailwind-Klassen anpassen, um globale Variablen zu nutzen */
+    @apply px-8 py-4 text-white rounded-full font-semibold transition-all duration-300 flex items-center relative overflow-hidden;
+    background: linear-gradient(90deg, var(--accent-gold), var(--accent-silver)); /* Akzentfarben angepasst */
   }
 
   .about-cta-btn::before {
@@ -456,21 +408,21 @@
 
   .about-cta-btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 15px 35px rgba(243, 82, 255, 0.4);
+    box-shadow: 0 15px 35px var(--shadow-deep); /* Schattenfarbe anpassen */
   }
 
-  /* Float Animation */
+  /* Float Animation - beibehalten */
   @keyframes float {
     0%, 100% { transform: translateY(0px); }
     50% { transform: translateY(-20px); }
   }
 
-  /* Responsive */
+  /* Responsive - beibehalten */
   @media (max-width: 1024px) {
     .floating-stats {
       display: none;
     }
-    
+
     .equipment-icons {
       position: relative;
       bottom: auto;
@@ -487,105 +439,126 @@
     // Intersection Observer for About Section
     const aboutContent = document.querySelector('.about-content');
     const skillItems = document.querySelectorAll('.skill-item');
-    
-    const observerOptions = {
-      threshold: 0.3,
-      rootMargin: '0px 0px -100px 0px'
-    };
 
-    const aboutObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          // Animate main content
-          aboutContent.style.opacity = '1';
-          aboutContent.style.transform = 'translateX(0)';
-          aboutContent.style.transition = 'all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-          
-          // Animate skills with delay
-          setTimeout(() => {
-            animateSkills();
-          }, 500);
-        }
-      });
-    }, observerOptions);
+    // Nur beobachten, wenn aboutContent gefunden wurde
+    if (aboutContent) {
+      const observerOptions = {
+        threshold: 0.3,
+        rootMargin: '0px 0px -100px 0px'
+      };
 
-    aboutObserver.observe(aboutContent);
+      const aboutObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            // Animate main content
+            // Type assertion to HTMLElement
+            const targetAboutContent = entry.target as HTMLElement;
+            targetAboutContent.style.opacity = '1';
+            targetAboutContent.style.transform = 'translateX(0)';
+            targetAboutContent.style.transition = 'all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+
+            // Animate skills with delay
+            setTimeout(() => {
+              animateSkills();
+            }, 500);
+          }
+        });
+      }, observerOptions);
+
+      aboutObserver.observe(aboutContent);
+    }
 
     // Skills Animation
     function animateSkills() {
       skillItems.forEach((item, index) => {
-        const progressBar = item.querySelector('.skill-progress');
-        const targetWidth = progressBar.dataset.width;
-        
-        setTimeout(() => {
-          progressBar.style.width = targetWidth;
-        }, index * 200);
+        // Type assertion to HTMLElement
+        const progressBar = item.querySelector('.skill-progress') as HTMLElement;
+        if (progressBar) { // Überprüfung, ob progressBar existiert
+          const targetWidth = progressBar.dataset.width; // dataset ist jetzt sicher zugreifbar
+          if (targetWidth) { // Überprüfen, ob data-width existiert
+            setTimeout(() => {
+              progressBar.style.width = targetWidth;
+            }, index * 200);
+          }
+        }
       });
     }
 
     // 3D Tilt Effect for Stat Cards
     const statCards = document.querySelectorAll('[data-tilt]');
-    
+
     statCards.forEach(card => {
-      card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
+      // Type assertion to HTMLElement
+      const htmlCard = card as HTMLElement;
+      htmlCard.addEventListener('mousemove', (e) => {
+        const rect = htmlCard.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
-        
+
         const rotateX = (y - centerY) / 4;
         const rotateY = (centerX - x) / 4;
-        
-        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px) scale(1.05)`;
+
+        htmlCard.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px) scale(1.05)`;
       });
-      
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0) scale(1)';
+
+      htmlCard.addEventListener('mouseleave', () => {
+        htmlCard.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0) scale(1)';
       });
     });
 
     // Enhanced Portrait Card Interaction
     const portraitCard = document.querySelector('.portrait-card');
     let isFlipped = false;
-    
-    portraitCard.addEventListener('click', () => {
-      isFlipped = !isFlipped;
-      const inner = portraitCard.querySelector('.portrait-inner');
-      
-      if (isFlipped) {
-        inner.style.transform = 'rotateY(180deg)';
-      } else {
-        inner.style.transform = 'rotateY(0deg)';
-      }
-    });
+
+    if (portraitCard) { // Überprüfung, ob portraitCard existiert
+      portraitCard.addEventListener('click', () => {
+        isFlipped = !isFlipped;
+        // Type assertion to HTMLElement
+        const inner = portraitCard.querySelector('.portrait-inner') as HTMLElement;
+
+        if (inner) { // Überprüfung, ob inner existiert
+          if (isFlipped) {
+            inner.style.transform = 'rotateY(180deg)';
+          } else {
+            inner.style.transform = 'rotateY(0deg)';
+          }
+        }
+      });
+    }
 
     // Parallax effect for floating elements
     window.addEventListener('scroll', () => {
       const scrolled = window.pageYOffset;
       const rate = scrolled * -0.5;
-      
+
       document.querySelectorAll('.stat-card').forEach((card, index) => {
+        // Type assertion to HTMLElement
+        const htmlCard = card as HTMLElement;
         const speed = 0.5 + (index * 0.1);
-        card.style.transform = `translateY(${rate * speed}px)`;
+        htmlCard.style.transform = `translateY(${rate * speed}px)`;
       });
     });
 
     // Equipment icons hover effect enhancement
     const equipmentIcons = document.querySelectorAll('.equipment-icon');
-    
+
     equipmentIcons.forEach(icon => {
-      icon.addEventListener('mouseenter', () => {
+      // Type assertion to HTMLElement
+      const htmlIcon = icon as HTMLElement;
+      htmlIcon.addEventListener('mouseenter', () => {
         // Add glow effect
-        icon.style.boxShadow = '0 15px 30px rgba(243, 82, 255, 0.4), 0 0 20px rgba(243, 82, 255, 0.3)';
-        
+        // Angepasste Schattenfarbe
+        htmlIcon.style.boxShadow = `0 15px 30px var(--shadow-deep), 0 0 20px var(--shadow-soft)`;
+
         // Slight shake animation
-        icon.style.animation = 'shake 0.5s ease-in-out';
+        htmlIcon.style.animation = 'shake 0.5s ease-in-out';
       });
-      
-      icon.addEventListener('mouseleave', () => {
-        icon.style.boxShadow = '';
-        icon.style.animation = '';
+
+      htmlIcon.addEventListener('mouseleave', () => {
+        htmlIcon.style.boxShadow = '';
+        htmlIcon.style.animation = '';
       });
     });
 
@@ -604,7 +577,7 @@
     const isMobile = window.innerWidth < 768;
     if (isMobile) {
       document.querySelectorAll('.stat-card').forEach(card => {
-        card.style.animation = 'none';
+        (card as HTMLElement).style.animation = 'none'; // Type assertion here as well
       });
     }
   });

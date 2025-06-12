@@ -1,17 +1,27 @@
 ---
-// src/components/PortraitSection.astro (FINALE KORREKTUR)
-
-export interface Props {
-    images: string[]; // Erwartet eine Liste von Pfaden
+// Wir benutzen die gleiche intelligente Logik hier
+export interface Item {
+    type: 'image' | 'video';
+    src: string;
+    alt: string;
 }
-const { images } = Astro.props;
+export interface Props {
+    items: ReadonlyArray<Item>;
+}
+const { items } = Astro.props;
 ---
 <section class="portraits section" id="portraits">
     <h2 class="section-title serif scroll-reveal">Portraits</h2>
     <div class="portrait-masonry">
-        {images.map((imgPath, index) => (
-            <div class={`portrait-item scroll-reveal stagger-${index + 1}`}>
-                <img src={imgPath} alt={`Portraitbild ${index + 1}`} loading="lazy" decoding="async" />
+        {items.map((item, index) => (
+            <div class={`portrait-item portfolio-item-reveal stagger-${index + 1}`}>
+                 {item.type === 'video' ? (
+                    <video autoplay loop muted playsinline class="portfolio-video" data-smart-video>
+                        <source src={item.src} type="video/mp4" />
+                    </video>
+                ) : (
+                    <img src={item.src} alt={item.alt} loading="lazy" decoding="async" />
+                )}
             </div>
         ))}
     </div>

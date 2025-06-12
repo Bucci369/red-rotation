@@ -1,25 +1,35 @@
 ---
-// src/components/LandscapeSection.astro (FINALE KORREKTUR)
+// Die Datenstruktur, die die Komponente erwartet
+export interface Item {
+    type: 'image' | 'video';
+    src: string;
+    alt: string;
+    title?: string; // Optional machen, da es bei Portrait/Sport fehlen kann
+    desc?: string;  // Optional machen, da es bei Portrait/Sport fehlen kann
+    poster?: string;
+}
 
 export interface Props {
-    images: { 
-        src: string; // Erwartet jetzt einen Text (Pfad), kein importiertes Bild
-        alt: string; 
-        title: string; 
-        desc: string 
-    }[];
+    items: ReadonlyArray<Item>;
 }
-const { images } = Astro.props;
+
+const { items } = Astro.props;
 ---
 <section class="landscapes section" id="landscapes">
-    <h2 class="section-title serif scroll-reveal">Landschaften</h2>
+    <h2 class="section-title serif">Landschaften</h2>
     <div class="landscape-grid">
-        {images.map((img, index) => (
-            <div class={`landscape-item scroll-reveal stagger-${index + 1}`}>
-                <img src={img.src} alt={img.alt} loading="lazy" decoding="async" />
+        {items.map((item, index) => (
+            <div class={`landscape-item portfolio-item-reveal stagger-${index + 1}`}>
+                {item.type === 'video' ? (
+                    <video autoplay loop muted playsinline poster={item.poster} class="portfolio-video" data-smart-video>
+                        <source src={item.src} type="video/mp4" />
+                    </video>
+                ) : (
+                    <img src={item.src} alt={item.alt} loading="lazy" decoding="async" />
+                )}
                 <div class="landscape-overlay">
-                    <div class="landscape-title">{img.title}</div>
-                    <div class="landscape-desc">{img.desc}</div>
+                    <div class="landscape-title">{item.title}</div>
+                    <div class="landscape-desc">{item.desc}</div>
                 </div>
             </div>
         ))}

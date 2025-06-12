@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // === MOBILE NAVIGATION ===
     const menuBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
-    const mobileNavLinks = mobileMenu.querySelectorAll('a');
+    const mobileNavLinks = mobileMenu?.querySelectorAll('a');
     const body = document.body;
 
     if (menuBtn) {
@@ -13,7 +13,8 @@ document.addEventListener('DOMContentLoaded', function() {
             body.classList.toggle('menu-open');
         });
     }
-    if (mobileNavLinks.length) {
+
+    if (mobileNavLinks?.length) {
         mobileNavLinks.forEach(link => {
             link.addEventListener('click', () => {
                 menuBtn.classList.remove('open');
@@ -52,20 +53,20 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    
     document.querySelectorAll('.scroll-reveal').forEach(el => {
         scrollObserver.observe(el);
     });
     
-    // === FINALE LOGIK FÜR HERO-ANIMATIONEN ===
+    // === HERO PARALLAX ANIMATIONEN ===
     const pinContainer = document.querySelector('.pin-container');
     const parallaxBg = document.getElementById('parallax-bg');
     const parallaxFg = document.getElementById('parallax-fg');
     const lightElement = document.getElementById('hero-light');
     const heroSection = document.getElementById('hero');
 
-    if (pinContainer && parallaxBg && parallaxFg && lightElement && heroSection) {
+    if (pinContainer && parallaxBg && parallaxFg) {
         
-        // --- PINNING & ZOOM LOGIK ---
         const updatePinnedAnimation = () => {
             const scrollTop = window.pageYOffset;
             const pinStart = pinContainer.offsetTop;
@@ -74,29 +75,17 @@ document.addEventListener('DOMContentLoaded', function() {
             if (scrollTop >= pinStart && scrollTop <= pinStart + pinDuration) {
                 const progress = (scrollTop - pinStart) / pinDuration;
                 
-                // 1. Hintergrund zoomt (von 100% auf 130%)
+                // Hintergrund zoomt (von 100% auf 130%)
                 const bgScale = 1 + progress * 0.3;
                 parallaxBg.style.transform = `scale(${bgScale})`;
 
-                // 2. Vordergrund zoomt minimal mit und wird leicht nach unten geschoben, um auf dem Boden zu bleiben
-                const fgScale = 1 + progress * 0.05; // Zoomt nur 5%
-                const fgTranslateY = progress * 50; // Verschiebt sich 50px nach unten
-                parallaxFg.style.transform = `scale(${fgScale}) translateY(${fgTranslateY}px)`;
+                // Vordergrund zoomt nur minimal (5%)
+                const fgScale = 1 + progress * 0.05;
+                parallaxFg.style.transform = `scale(${fgScale})`;
             }
         };
 
-        // --- LICHTKEGEL LOGIK ---
-        const updateLightPosition = (e) => {
-            const rect = heroSection.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            lightElement.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%) scale(1)`;
-        };
-        heroSection.addEventListener('mouseenter', () => lightElement.style.transform = lightElement.style.transform.replace('scale(0)', 'scale(1)'));
-        heroSection.addEventListener('mouseleave', () => lightElement.style.transform = lightElement.style.transform.replace('scale(1)', 'scale(0)'));
-        heroSection.addEventListener('mousemove', updateLightPosition);
-
-        // --- ALLES IN EINEM EVENT LISTENER FÜR PERFORMANCE ---
+        // Event Listener für Scroll
         let ticking = false;
         window.addEventListener('scroll', () => {
             if (!ticking) {
@@ -109,8 +98,28 @@ document.addEventListener('DOMContentLoaded', function() {
         }, { passive: true });
     }
 
-    // ... (restliche Skripte wie Video Player etc. bleiben unverändert) ...
-});
+    // === LICHTKEGEL LOGIK ===
+    if (heroSection && lightElement) {
+        const updateLightPosition = (e) => {
+            const rect = heroSection.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            // Setze die Position direkt
+            lightElement.style.left = x + 'px';
+            lightElement.style.top = y + 'px';
+        };
+        
+        heroSection.addEventListener('mouseenter', () => {
+            lightElement.style.transform = 'translate(-50%, -50%) scale(1)';
+        });
+        
+        heroSection.addEventListener('mouseleave', () => {
+            lightElement.style.transform = 'translate(-50%, -50%) scale(0)';
+        });
+        
+        heroSection.addEventListener('mousemove', updateLightPosition);
+    }
 
     // === SMART VIDEO PLAYBACK ===
     const smartVideos = document.querySelectorAll('[data-smart-video]');
@@ -119,13 +128,13 @@ document.addEventListener('DOMContentLoaded', function() {
             entries.forEach((entry) => {
                 const video = entry.target;
                 if (entry.isIntersecting) {
-                    video.play().catch(e => {});
+                    video.play().catch(e => console.log('Video play failed:', e));
                 } else {
                     video.pause();
                 }
             });
         }, { threshold: 0.5 });
+        
         smartVideos.forEach((video) => videoObserver.observe(video));
     }
-
-
+});

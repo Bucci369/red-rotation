@@ -1,17 +1,27 @@
 ---
-// src/components/SportSection.astro (FINALE KORREKTUR)
-
-export interface Props {
-    images: string[]; // Erwartet eine Liste von Pfaden
+// Und auch hier...
+export interface Item {
+    type: 'image' | 'video';
+    src: string;
+    alt: string;
 }
-const { images } = Astro.props;
+export interface Props {
+    items: ReadonlyArray<Item>;
+}
+const { items } = Astro.props;
 ---
 <section class="sport section" id="sport">
     <h2 class="section-title serif scroll-reveal">Sport & Lifestyle</h2>
     <div class="sport-grid">
-        {images.map((imgPath, index) => (
-            <div class={`sport-item scroll-reveal stagger-${index + 1}`}>
-                <img src={imgPath} alt={`Sportbild ${index + 1}`} loading="lazy" decoding="async" />
+        {items.map((item, index) => (
+            <div class={`sport-item portfolio-item-reveal stagger-${index + 1}`}>
+                {item.type === 'video' ? (
+                    <video autoplay loop muted playsinline class="portfolio-video" data-smart-video>
+                        <source src={item.src} type="video/mp4" />
+                    </video>
+                ) : (
+                    <img src={item.src} alt={item.alt} loading="lazy" decoding="async" />
+                )}
             </div>
         ))}
     </div>
