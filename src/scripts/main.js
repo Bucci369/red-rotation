@@ -1,54 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // ... (Code für Mobile Nav, Nav Scroll etc. bleibt gleich) ...
-
-    // === STICKY HERO & PARALLAX ZOOM (FINALE VERSION) ===
-    const pinContainer = document.querySelector('.pin-container');
-    const heroSection = document.querySelector('.sticky-hero');
-    const parallaxBg = document.getElementById('parallax-bg');
-    const parallaxFg = document.getElementById('parallax-fg');
-
-    if (pinContainer && heroSection && parallaxBg && parallaxFg) {
-        let ticking = false;
-
-        const updatePinnedAnimation = () => {
-            const rect = pinContainer.getBoundingClientRect();
-            const scrollTop = window.pageYOffset;
-            const pinStart = pinContainer.offsetTop;
-            const pinDuration = pinContainer.offsetHeight - window.innerHeight;
-
-            // Berechne den Fortschritt nur, während die Sektion gepinnt ist
-            if (scrollTop >= pinStart && scrollTop <= pinStart + pinDuration) {
-                // Fortschritt von 0 (Beginn des Pinnings) bis 1 (Ende des Pinnings)
-                const progress = (scrollTop - pinStart) / pinDuration;
-                
-                // 1. Hintergrund: Zoomt von 100% auf 130% basierend auf dem Fortschritt
-                const bgScale = 1 + progress * 0.3;
-                parallaxBg.style.transform = `scale(${bgScale})`;
-
-                // 2. Vordergrund (Bergspitze): Bleibt fast komplett still
-                // Du kannst hier eine minimale Bewegung einbauen, wenn du magst
-                // z.B. `translateY(${progress * -50}px)` für einen leichten 3D-Effekt
-                parallaxFg.style.transform = `scale(1)`; // Bleibt fix
-
-            } else if (scrollTop < pinStart) {
-                // Reset vor dem Pinning
-                parallaxBg.style.transform = 'scale(1)';
-                parallaxFg.style.transform = 'scale(1)';
-            }
-            
-            ticking = false;
-        };
-
-        window.addEventListener('scroll', () => {
-            if (!ticking) {
-                window.requestAnimationFrame(updatePinnedAnimation);
-                ticking = true;
-            }
-        }, { passive: true });
-    }
-
-
-    // KOMPLETTER CODE ZUM KOPIEREN (inklusive der anderen Funktionen):
     
     // === MOBILE NAVIGATION ===
     const menuBtn = document.getElementById('mobile-menu-btn');
@@ -105,6 +55,42 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.scroll-reveal').forEach(el => {
         scrollObserver.observe(el);
     });
+    
+    // === STICKY HERO & PARALLAX ZOOM ===
+    const pinContainer = document.querySelector('.pin-container');
+    const heroSection = document.querySelector('.sticky-hero');
+    const parallaxBg = document.getElementById('parallax-bg');
+    const parallaxFg = document.getElementById('parallax-fg');
+
+    if (pinContainer && heroSection && parallaxBg && parallaxFg) {
+        let ticking = false;
+
+        const updatePinnedAnimation = () => {
+            const rect = pinContainer.getBoundingClientRect();
+            const scrollTop = window.pageYOffset;
+            const pinStart = pinContainer.offsetTop;
+            const pinDuration = pinContainer.offsetHeight - window.innerHeight;
+
+            if (scrollTop >= pinStart && scrollTop <= pinStart + pinDuration) {
+                const progress = (scrollTop - pinStart) / pinDuration;
+                
+                const bgScale = 1 + progress * 0.3;
+                parallaxBg.style.transform = `scale(${bgScale})`;
+
+                const fgTranslateY = progress * 20; 
+                parallaxFg.style.transform = `translateY(-${fgTranslateY}px) translateX(-50%)`;
+            }
+            
+            ticking = false;
+        };
+
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(updatePinnedAnimation);
+                ticking = true;
+            }
+        }, { passive: true });
+    }
 
     // === SMART VIDEO PLAYBACK ===
     const smartVideos = document.querySelectorAll('[data-smart-video]');
