@@ -1,0 +1,18 @@
+---
+// src/components/PortraitSection.astro (FINALE KORREKTUR)
+
+export interface Props {
+    images: string[]; // Erwartet eine Liste von Pfaden
+}
+const { images } = Astro.props;
+---
+<section class="portraits section" id="portraits">
+    <h2 class="section-title serif scroll-reveal">Portraits</h2>
+    <div class="portrait-masonry">
+        {images.map((imgPath, index) => (
+            <div class={`portrait-item scroll-reveal stagger-${index + 1}`}>
+                <img src={imgPath} alt={`Portraitbild ${index + 1}`} loading="lazy" decoding="async" />
+            </div>
+        ))}
+    </div>
+</section>

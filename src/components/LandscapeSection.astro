@@ -1,0 +1,27 @@
+---
+// src/components/LandscapeSection.astro (FINALE KORREKTUR)
+
+export interface Props {
+    images: { 
+        src: string; // Erwartet jetzt einen Text (Pfad), kein importiertes Bild
+        alt: string; 
+        title: string; 
+        desc: string 
+    }[];
+}
+const { images } = Astro.props;
+---
+<section class="landscapes section" id="landscapes">
+    <h2 class="section-title serif scroll-reveal">Landschaften</h2>
+    <div class="landscape-grid">
+        {images.map((img, index) => (
+            <div class={`landscape-item scroll-reveal stagger-${index + 1}`}>
+                <img src={img.src} alt={img.alt} loading="lazy" decoding="async" />
+                <div class="landscape-overlay">
+                    <div class="landscape-title">{img.title}</div>
+                    <div class="landscape-desc">{img.desc}</div>
+                </div>
+            </div>
+        ))}
+    </div>
+</section>

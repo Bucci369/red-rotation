@@ -1,0 +1,19 @@
+---
+export interface Props {
+    videoSrc: string;
+    quote: string;
+    author: string;
+}
+const { videoSrc, quote, author } = Astro.props;
+---
+<section class="video-buffer">
+    <video autoplay loop muted playsinline preload="metadata" data-smart-video>
+        <source src={videoSrc} type="video/mp4">
+        Dein Browser unterstützt keine Videos.
+    </video>
+    <div class="video-buffer-overlay"></div>
+    <div class="video-buffer-content">
+        <p class="video-buffer-quote serif">{quote}</p>
+        <p class="video-buffer-author">— {author}</p>
+    </div>
+</section>
