@@ -1,5 +1,6 @@
 ---
 // Finale Fotografen-Website mit allen Bildern & satten Farben
+import { ViewTransitions } from 'astro:transitions';
 import imageBerge from '../assets/images/image_Berge.JPG';
 import imageBergeStrasse from '../assets/images/image_Bergemitstraße.JPG';
 import imageBergeStrassePng from '../assets/images/image_Bergemitstraße.png';
@@ -17,8 +18,9 @@ import imageSchneeBaumPerson from '../assets/images/image_schnee mit baum und pe
 import imageSchneeBaum from '../assets/images/image_schnee mit baum.JPG';
 import imageSchneePersonRot from '../assets/images/image_schnee mit person_rotejacke.png';
 import imageTalBerge from '../assets/images/image_tal_mit_bergen.png';
-import videoBergen from '../assets/videos/video_von_bergen.mp4';
-import videoBergenWald from '../assets/videos/video_von_bergen und wald.mp4';
+// Videos aus public/ Ordner verwenden
+const videoBergen = { src: '/videos/video_von_bergen.mp4' };
+const videoBergenWald = { src: '/videos/video_von_bergen und wald.mp4' };
 ---
 
 <!DOCTYPE html>
@@ -28,10 +30,13 @@ import videoBergenWald from '../assets/videos/video_von_bergen und wald.mp4';
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Red Rotation Photography - Professionelle Fotografie</title>
   
+  <!-- Astro View Transitions -->
+  <ViewTransitions />
+  
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
   <style>
     /* Satte, gestochen schwarze Farbpalette */
@@ -55,7 +60,7 @@ import videoBergenWald from '../assets/videos/video_von_bergen und wald.mp4';
     }
 
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Space Grotesk', sans-serif;
       background: var(--black);
       color: var(--white);
       overflow-x: hidden;
@@ -63,7 +68,13 @@ import videoBergenWald from '../assets/videos/video_von_bergen und wald.mp4';
     }
 
     .serif {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 2px;
+    }
+
+    .tech {
+      font-family: 'Orbitron', monospace;
+      letter-spacing: 1px;
     }
 
     /* === HERO SECTION === */
@@ -88,30 +99,28 @@ import videoBergenWald from '../assets/videos/video_von_bergen und wald.mp4';
 
     .parallax-bg {
       position: absolute;
-      top: -30%;
-      left: -30%;
-      width: 160%;
-      height: 160%;
+      top: -20%;
+      left: -20%;
+      width: 140%;
+      height: 140%;
       background-image: url('/image_hintergrund_von_bergspitze.png');
       background-size: cover;
       background-position: center;
       will-change: transform;
-      transition: transform 0.1s ease-out;
       filter: brightness(0.7) contrast(1.1);
     }
 
     .parallax-fg {
       position: absolute;
-      top: -20%;
-      left: -20%;
-      width: 140%;
-      height: 140%;
+      top: -10%;
+      left: -10%;
+      width: 120%;
+      height: 120%;
       background-image: url('/image_bergspitze_ohne_hintergrund.png');
       background-size: contain;
       background-position: center bottom;
       background-repeat: no-repeat;
       will-change: transform;
-      transition: transform 0.1s ease-out;
       z-index: 2;
       filter: brightness(0.8) contrast(1.2);
     }
@@ -265,7 +274,7 @@ import videoBergenWald from '../assets/videos/video_von_bergen und wald.mp4';
     /* === LANDSCAPE SECTION === */
     .landscapes {
       padding: 8rem 2rem;
-      background: var(--charcoal);
+      background: var(--black);
     }
 
     .section-title {
@@ -292,6 +301,8 @@ import videoBergenWald from '../assets/videos/video_von_bergen und wald.mp4';
       background: var(--dark-gray);
       transition: all 0.6s ease;
       cursor: pointer;
+      transform-style: preserve-3d;
+      perspective: 1000px;
     }
 
     .landscape-item:hover {
@@ -303,13 +314,16 @@ import videoBergenWald from '../assets/videos/video_von_bergen und wald.mp4';
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: all 0.6s ease;
+      transition: all 0.3s ease;
       filter: brightness(0.8) contrast(1.1) saturate(1.2);
+      transform-style: preserve-3d;
+      will-change: transform;
     }
 
     .landscape-item:hover img {
       transform: scale(1.1);
-      filter: brightness(1) contrast(1.2) saturate(1.3);
+      filter: brightness(1) contrast(1.2) saturate(1.3) blur(0px);
+      animation: liquidDistortion 0.6s ease-out;
     }
 
     .landscape-overlay {
@@ -359,6 +373,8 @@ import videoBergenWald from '../assets/videos/video_von_bergen und wald.mp4';
       overflow: hidden;
       background: var(--dark-gray);
       transition: all 0.5s ease;
+      transform-style: preserve-3d;
+      perspective: 1000px;
     }
 
     .portrait-item:nth-child(3n) {
@@ -373,8 +389,10 @@ import videoBergenWald from '../assets/videos/video_von_bergen und wald.mp4';
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: all 0.5s ease;
+      transition: all 0.3s ease;
       filter: brightness(0.9) contrast(1.1);
+      transform-style: preserve-3d;
+      will-change: transform;
     }
 
     .portrait-item:hover {
@@ -384,78 +402,10 @@ import videoBergenWald from '../assets/videos/video_von_bergen und wald.mp4';
     }
 
     .portrait-item:hover img {
-      filter: brightness(1.1) contrast(1.2);
+      filter: brightness(1.1) contrast(1.2) blur(0px);
+      animation: liquidWave 0.8s ease-out;
     }
 
-    /* === VIDEO SECTION === */
-    .video-section {
-      padding: 8rem 2rem;
-      background: var(--charcoal);
-      position: relative;
-    }
-
-    .video-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
-    }
-
-    .video-content h2 {
-      font-size: clamp(3rem, 6vw, 5rem);
-      margin-bottom: 2rem;
-      color: var(--white);
-    }
-
-    .video-content p {
-      font-size: 1.2rem;
-      color: var(--light-gray);
-      margin-bottom: 3rem;
-      line-height: 1.8;
-    }
-
-    .video-player {
-      position: relative;
-      aspect-ratio: 16/9;
-      overflow: hidden;
-      background: var(--black);
-    }
-
-    .video-player video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: brightness(0.8) contrast(1.2);
-    }
-
-    .video-controls {
-      position: absolute;
-      bottom: 2rem;
-      left: 2rem;
-      display: flex;
-      gap: 1rem;
-    }
-
-    .video-btn {
-      width: 50px;
-      height: 50px;
-      border: 2px solid var(--accent-gold);
-      background: rgba(212, 175, 55, 0.2);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--accent-gold);
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .video-btn:hover {
-      background: var(--accent-gold);
-      color: var(--black);
-    }
 
     /* === SPORT SECTION === */
     .sport {
@@ -498,7 +448,8 @@ import videoBergenWald from '../assets/videos/video_von_bergen und wald.mp4';
 
     .sport-item:hover img {
       transform: scale(1.1);
-      filter: brightness(1) contrast(1.4) saturate(1.2);
+      filter: brightness(1) contrast(1.4) saturate(1.2) blur(0px);
+      animation: liquidRipple 0.5s ease-out;
     }
 
     /* === CONTACT SECTION === */
@@ -566,6 +517,76 @@ import videoBergenWald from '../assets/videos/video_von_bergen und wald.mp4';
       100% { transform: translateX(100%); }
     }
 
+    /* 🔥 LIQUID DISTORTION ANIMATIONS 🔥 */
+    @keyframes liquidDistortion {
+      0% { 
+        filter: brightness(1) contrast(1.2) saturate(1.3) blur(0px);
+        transform: scale(1.1) skew(0deg, 0deg);
+      }
+      20% { 
+        filter: brightness(1.1) contrast(1.3) saturate(1.4) blur(2px);
+        transform: scale(1.12) skew(2deg, 1deg);
+      }
+      40% { 
+        filter: brightness(1.05) contrast(1.25) saturate(1.35) blur(1px);
+        transform: scale(1.115) skew(-1deg, 2deg);
+      }
+      60% { 
+        filter: brightness(1.08) contrast(1.28) saturate(1.38) blur(3px);
+        transform: scale(1.118) skew(1deg, -1deg);
+      }
+      80% { 
+        filter: brightness(1.02) contrast(1.22) saturate(1.32) blur(1px);
+        transform: scale(1.112) skew(-0.5deg, 0.5deg);
+      }
+      100% { 
+        filter: brightness(1) contrast(1.2) saturate(1.3) blur(0px);
+        transform: scale(1.1) skew(0deg, 0deg);
+      }
+    }
+
+    @keyframes liquidWave {
+      0% { 
+        filter: brightness(1.1) contrast(1.2) blur(0px);
+        transform: scale(1) perspective(1000px) rotateX(0deg) rotateY(0deg);
+      }
+      25% { 
+        filter: brightness(1.15) contrast(1.25) blur(1px);
+        transform: scale(1.02) perspective(1000px) rotateX(2deg) rotateY(-1deg);
+      }
+      50% { 
+        filter: brightness(1.12) contrast(1.23) blur(2px);
+        transform: scale(1.03) perspective(1000px) rotateX(-1deg) rotateY(2deg);
+      }
+      75% { 
+        filter: brightness(1.18) contrast(1.27) blur(1px);
+        transform: scale(1.025) perspective(1000px) rotateX(1deg) rotateY(-0.5deg);
+      }
+      100% { 
+        filter: brightness(1.1) contrast(1.2) blur(0px);
+        transform: scale(1) perspective(1000px) rotateX(0deg) rotateY(0deg);
+      }
+    }
+
+    @keyframes liquidRipple {
+      0% { 
+        filter: brightness(0.8) contrast(1.3) saturate(1.1) blur(0px);
+        transform: scale(1);
+      }
+      30% { 
+        filter: brightness(1.2) contrast(1.4) saturate(1.2) blur(3px);
+        transform: scale(1.05);
+      }
+      60% { 
+        filter: brightness(0.9) contrast(1.35) saturate(1.15) blur(1px);
+        transform: scale(1.03);
+      }
+      100% { 
+        filter: brightness(0.8) contrast(1.3) saturate(1.1) blur(0px);
+        transform: scale(1);
+      }
+    }
+
     .scroll-reveal {
       opacity: 0;
       transform: translateY(50px);
@@ -612,6 +633,41 @@ import videoBergenWald from '../assets/videos/video_von_bergen und wald.mp4';
     .particle:nth-child(6) { left: 90%; top: 80%; animation-delay: 5s; }
 
     /* === RESPONSIVE === */
+    
+    /* Large Screens (1920px+) - Zeige ganzes Bild */
+    @media (min-width: 1920px) {
+      .parallax-bg {
+        top: -10%;
+        left: -10%;
+        width: 120%;
+        height: 120%;
+      }
+      
+      .parallax-fg {
+        top: -5%;
+        left: -5%;
+        width: 110%;
+        height: 110%;
+      }
+    }
+    
+    /* Desktop (1024px - 1920px) */
+    @media (max-width: 1919px) and (min-width: 1025px) {
+      .parallax-bg {
+        top: -15%;
+        left: -15%;
+        width: 130%;
+        height: 130%;
+      }
+      
+      .parallax-fg {
+        top: -8%;
+        left: -8%;
+        width: 116%;
+        height: 116%;
+      }
+    }
+
     @media (max-width: 1024px) {
       .hero-title {
         font-size: clamp(3rem, 8vw, 6rem);
@@ -624,6 +680,21 @@ import videoBergenWald from '../assets/videos/video_von_bergen und wald.mp4';
       
       .portrait-masonry {
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      }
+      
+      /* Tablet - mehr Zoom für bessere Sichtbarkeit */
+      .parallax-bg {
+        top: -25%;
+        left: -25%;
+        width: 150%;
+        height: 150%;
+      }
+      
+      .parallax-fg {
+        top: -15%;
+        left: -15%;
+        width: 130%;
+        height: 130%;
       }
     }
 
@@ -657,10 +728,6 @@ import videoBergenWald from '../assets/videos/video_von_bergen und wald.mp4';
         grid-column: span 1;
       }
       
-      .video-container {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
       
       .sport-grid {
         grid-template-columns: 1fr;
@@ -679,6 +746,22 @@ import videoBergenWald from '../assets/videos/video_von_bergen und wald.mp4';
       
       .floating-particles {
         display: none;
+      }
+      
+      /* Mobile - Optimiert für Portrait-Format */
+      .parallax-bg {
+        top: -35%;
+        left: -35%;
+        width: 170%;
+        height: 170%;
+        background-position: center center;
+      }
+      
+      .parallax-fg {
+        top: -20%;
+        left: -20%;
+        width: 140%;
+        height: 140%;
       }
     }
 
@@ -705,7 +788,6 @@ import videoBergenWald from '../assets/videos/video_von_bergen und wald.mp4';
       .landscapes,
       .portraits,
       .sport,
-      .video-section,
       .contact {
         padding: 4rem 1rem;
       }
@@ -726,6 +808,7 @@ import videoBergenWald from '../assets/videos/video_von_bergen und wald.mp4';
     .sport-item {
       will-change: transform;
     }
+
 
     /* === VIDEO BUFFER SECTIONS === */
     .video-buffer {
@@ -908,9 +991,8 @@ import videoBergenWald from '../assets/videos/video_von_bergen und wald.mp4';
 
   <!-- Video Buffer 1 -->
   <section class="video-buffer" id="video-buffer-1">
-    <video muted loop playsinline preload="metadata" style="background: red;">
+    <video muted loop playsinline preload="metadata" autoplay data-smart-video>
       <source src={videoBergen.src} type="video/mp4">
-      <p>Video loading failed. Path: {videoBergen.src}</p>
     </video>
     <div class="video-buffer-overlay"></div>
     <div class="video-buffer-content">
@@ -918,7 +1000,6 @@ import videoBergenWald from '../assets/videos/video_von_bergen und wald.mp4';
         "Jeder Moment ist einzigartig – ich halte ihn für die Ewigkeit fest."
       </p>
       <p class="video-buffer-author">— Red Rotation Photography</p>
-      <p style="color: yellow; font-size: 12px;">Debug: {videoBergen.src}</p>
     </div>
   </section>
 
@@ -952,9 +1033,9 @@ import videoBergenWald from '../assets/videos/video_von_bergen und wald.mp4';
     </div>
   </section>
 
-  <!-- Video Buffer 2 -->
+  <!-- Video Buffer: Wald & Berge -->
   <section class="video-buffer" id="video-buffer-2">
-    <video muted loop playsinline preload="metadata">
+    <video muted loop playsinline preload="metadata" autoplay data-smart-video>
       <source src={videoBergenWald.src} type="video/mp4">
     </video>
     <div class="video-buffer-overlay"></div>
@@ -963,45 +1044,6 @@ import videoBergenWald from '../assets/videos/video_von_bergen und wald.mp4';
         "In der Stille der Natur finden wir die lautesten Geschichten."
       </p>
       <p class="video-buffer-author">— Philosophie der Fotografie</p>
-    </div>
-  </section>
-
-  <!-- Video Section -->
-  <section class="video-section" id="video">
-    <div class="video-container">
-      <div class="video-content scroll-reveal">
-        <h2 class="serif">Bewegte Geschichten</h2>
-        <p>
-          Nicht nur Fotografie – auch bewegte Bilder, die Emotionen zum Leben erwecken. 
-          Cinematic Videography für außergewöhnliche Projekte.
-        </p>
-        <a href="#contact" class="cta-button">Video anfragen</a>
-      </div>
-      
-      <div class="video-player scroll-reveal">
-        <video id="main-video" muted loop autoplay>
-          <source src={videoBergen.src} type="video/mp4">
-          <source src={videoBergenWald.src} type="video/mp4">
-        </video>
-        <div class="video-controls">
-          <button class="video-btn" id="play-pause">▶</button>
-          <button class="video-btn" id="switch-video">⟲</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Video Buffer 3 -->
-  <section class="video-buffer" id="video-buffer-3">
-    <video muted loop playsinline preload="metadata">
-      <source src={videoBergen.src} type="video/mp4">
-    </video>
-    <div class="video-buffer-overlay"></div>
-    <div class="video-buffer-content">
-      <p class="video-buffer-quote serif">
-        "Bewegung ist Leben – ich zeige die Energie des Augenblicks."
-      </p>
-      <p class="video-buffer-author">— Sport & Action Photography</p>
     </div>
   </section>
 
@@ -1023,6 +1065,20 @@ import videoBergenWald from '../assets/videos/video_von_bergen und wald.mp4';
     </div>
   </section>
 
+  <!-- Video Buffer: Berge Action -->
+  <section class="video-buffer" id="video-buffer-3">
+    <video muted loop playsinline preload="metadata" autoplay data-smart-video>
+      <source src={videoBergen.src} type="video/mp4">
+    </video>
+    <div class="video-buffer-overlay"></div>
+    <div class="video-buffer-content">
+      <p class="video-buffer-quote serif">
+        "Bewegung ist Leben – ich zeige die Energie des Augenblicks."
+      </p>
+      <p class="video-buffer-author">— Sport & Action Photography</p>
+    </div>
+  </section>
+
   <!-- Contact Section -->
   <section class="contact" id="contact">
     <h2 class="serif scroll-reveal">Let's Create</h2>
@@ -1038,36 +1094,7 @@ import videoBergenWald from '../assets/videos/video_von_bergen und wald.mp4';
   <!-- JavaScript -->
   <script define:vars={{ videoBergen: videoBergen.src, videoBergenWald: videoBergenWald.src }}>
     document.addEventListener('DOMContentLoaded', function() {
-      // Parallax Effect
-      const parallaxBg = document.getElementById('parallax-bg');
-      const parallaxFg = document.getElementById('parallax-fg');
-      let ticking = false;
-
-      function updateParallax() {
-        const scrolled = window.pageYOffset;
-        const viewportHeight = window.innerHeight;
-        const scrollProgress = scrolled / viewportHeight;
-        
-        // Background zoom in on scroll
-        const bgTransform = scrolled * 0.3;
-        const bgScale = 1 + (scrollProgress * 0.3);
-        parallaxBg.style.transform = `translateY(${bgTransform}px) scale(${bgScale})`;
-        
-        // Foreground moves faster
-        const fgTransform = scrolled * 0.6;
-        parallaxFg.style.transform = `translateY(${fgTransform}px)`;
-        
-        ticking = false;
-      }
-
-      function requestTick() {
-        if (!ticking) {
-          requestAnimationFrame(updateParallax);
-          ticking = true;
-        }
-      }
-
-      window.addEventListener('scroll', requestTick, { passive: true });
+      // Parallax Effect wird jetzt durch das kombinierte 3D-System gehandelt
 
       // Scroll Reveal Animation
       const observerOptions = {
@@ -1101,30 +1128,6 @@ import videoBergenWald from '../assets/videos/video_von_bergen und wald.mp4';
         });
       });
 
-      // Video Controls
-      const video = document.getElementById('main-video');
-      const playPauseBtn = document.getElementById('play-pause');
-      const switchVideoBtn = document.getElementById('switch-video');
-      
-      let currentVideoIndex = 0;
-      const videoSources = [videoBergen, videoBergenWald];
-
-      playPauseBtn.addEventListener('click', () => {
-        if (video.paused) {
-          video.play();
-          playPauseBtn.textContent = '⏸';
-        } else {
-          video.pause();
-          playPauseBtn.textContent = '▶';
-        }
-      });
-
-      switchVideoBtn.addEventListener('click', () => {
-        currentVideoIndex = (currentVideoIndex + 1) % videoSources.length;
-        video.src = videoSources[currentVideoIndex];
-        video.load();
-        video.play();
-      });
 
       // Enhanced Navigation on Scroll
       const nav = document.getElementById('nav');
@@ -1149,18 +1152,6 @@ import videoBergenWald from '../assets/videos/video_von_bergen und wald.mp4';
         lastScrollY = currentScrollY;
       });
 
-      // Performance: Pause video when not visible
-      const videoObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            video.play();
-          } else {
-            video.pause();
-          }
-        });
-      }, { threshold: 0.5 });
-
-      videoObserver.observe(video);
 
       // Auto-play video buffers when in viewport
       const videoBuffers = document.querySelectorAll('.video-buffer video');
@@ -1230,6 +1221,245 @@ import videoBergenWald from '../assets/videos/video_von_bergen und wald.mp4';
 
       bufferContents.forEach(content => {
         contentObserver.observe(content);
+      });
+
+      // Smart Video Script für data-smart-video
+      const smartVideos = document.querySelectorAll('[data-smart-video]');
+      
+      const smartVideoObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          const video = entry.target;
+          if (entry.isIntersecting) {
+            video.play().catch(e => console.log("Smart Video Autoplay verhindert:", e));
+          } else {
+            video.pause();
+          }
+        });
+      }, { threshold: 0.3 });
+
+      smartVideos.forEach((video) => smartVideoObserver.observe(video));
+
+      // 🔥 CURSOR-GESTEUERTE 3D-PARALLAXE 🔥
+      const parallaxElements = document.querySelectorAll('.landscape-item, .portrait-item, .sport-item');
+      
+      parallaxElements.forEach(element => {
+        const img = element.querySelector('img');
+        if (!img) return;
+        
+        element.addEventListener('mousemove', (e) => {
+          const rect = element.getBoundingClientRect();
+          const centerX = rect.left + rect.width / 2;
+          const centerY = rect.top + rect.height / 2;
+          
+          // Cursor-Position relativ zum Element-Zentrum
+          const x = e.clientX - centerX;
+          const y = e.clientY - centerY;
+          
+          // 3D-Rotation basierend auf Cursor-Position
+          const rotateX = (y / rect.height) * -20; // Max 20 Grad
+          const rotateY = (x / rect.width) * 20;   // Max 20 Grad
+          
+          // Smooth 3D-Transform
+          img.style.transform = `
+            perspective(1000px) 
+            rotateX(${rotateX}deg) 
+            rotateY(${rotateY}deg) 
+            translateZ(20px)
+            scale3d(1.05, 1.05, 1.05)
+          `;
+          
+          // Zusätzlicher Parallax-Effekt für das Container
+          element.style.transform = `
+            translateX(${x * 0.02}px) 
+            translateY(${y * 0.02}px)
+          `;
+        });
+        
+        
+        // Touch-Support für Mobile
+        element.addEventListener('touchmove', (e) => {
+          if (e.touches.length === 1) {
+            const touch = e.touches[0];
+            const rect = element.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            
+            const x = touch.clientX - centerX;
+            const y = touch.clientY - centerY;
+            
+            const rotateX = (y / rect.height) * -15; // Weniger intensiv auf Mobile
+            const rotateY = (x / rect.width) * 15;
+            
+            img.style.transform = `
+              perspective(1000px) 
+              rotateX(${rotateX}deg) 
+              rotateY(${rotateY}deg) 
+              translateZ(15px)
+              scale3d(1.03, 1.03, 1.03)
+            `;
+          }
+        });
+        
+      });
+
+      // 🏔️ SCROLL-PARALLAX - Bergspitze bleibt, Hintergrund bewegt sich
+      const parallaxBg = document.getElementById('parallax-bg');
+      const parallaxFg = document.getElementById('parallax-fg');
+      let ticking = false;
+
+      function updateParallax() {
+        const scrolled = window.pageYOffset;
+        const viewportHeight = window.innerHeight;
+        const scrollProgress = scrolled / viewportHeight;
+        
+        // Hintergrund bewegt sich langsam und zoomt
+        const bgTransform = scrolled * 0.3;
+        const bgScale = 1 + (scrollProgress * 0.2);
+        parallaxBg.style.transform = `translateY(${bgTransform}px) scale(${bgScale})`;
+        
+        // Bergspitze bleibt fast stehen (sehr langsame Bewegung)
+        const fgTransform = scrolled * 0.1;
+        parallaxFg.style.transform = `translateY(${fgTransform}px)`;
+        
+        ticking = false;
+      }
+
+      function requestTick() {
+        if (!ticking) {
+          requestAnimationFrame(updateParallax);
+          ticking = true;
+        }
+      }
+
+      window.addEventListener('scroll', requestTick, { passive: true });
+      
+
+      // 🌊 ADVANCED LIQUID DISTORTION SYSTEM 🌊
+      const liquidElements = document.querySelectorAll('.landscape-item img, .portrait-item img, .sport-item img');
+      
+      liquidElements.forEach(img => {
+        const container = img.closest('.landscape-item, .portrait-item, .sport-item');
+        let liquidTimeout;
+        
+        container.addEventListener('mouseenter', () => {
+          // Trigger verschiedene Liquid-Effekte basierend auf Element-Typ
+          if (container.classList.contains('landscape-item')) {
+            img.style.animation = 'liquidDistortion 0.6s ease-out';
+          } else if (container.classList.contains('portrait-item')) {
+            img.style.animation = 'liquidWave 0.8s ease-out';
+          } else if (container.classList.contains('sport-item')) {
+            img.style.animation = 'liquidRipple 0.5s ease-out';
+          }
+        });
+        
+        container.addEventListener('mousemove', (e) => {
+          const rect = container.getBoundingClientRect();
+          const x = ((e.clientX - rect.left) / rect.width) - 0.5;
+          const y = ((e.clientY - rect.top) / rect.height) - 0.5;
+          
+          // Dynamische Liquid-Verzerrung basierend auf Cursor-Position
+          const intensity = 3;
+          const skewX = x * intensity;
+          const skewY = y * intensity;
+          const blur = Math.abs(x) + Math.abs(y);
+          
+          clearTimeout(liquidTimeout);
+          liquidTimeout = setTimeout(() => {
+            img.style.filter = `
+              brightness(${1 + Math.abs(x * 0.1)}) 
+              contrast(${1.2 + Math.abs(y * 0.1)}) 
+              saturate(${1.3 + blur * 0.2}) 
+              blur(${blur * 2}px)
+            `;
+            img.style.transform = `
+              scale(${1.1 + blur * 0.02}) 
+              skew(${skewX}deg, ${skewY}deg)
+            `;
+          }, 10);
+        });
+        
+        
+        // Touch-Support für Mobile Liquid Effects
+        container.addEventListener('touchstart', (e) => {
+          if (e.touches.length === 1) {
+            if (container.classList.contains('landscape-item')) {
+              img.style.animation = 'liquidDistortion 0.6s ease-out';
+            } else if (container.classList.contains('portrait-item')) {
+              img.style.animation = 'liquidWave 0.8s ease-out';
+            } else if (container.classList.contains('sport-item')) {
+              img.style.animation = 'liquidRipple 0.5s ease-out';
+            }
+          }
+        });
+        
+      });
+
+      // 🎨 RIPPLE EFFECT beim Klick
+      liquidElements.forEach(img => {
+        const container = img.closest('.landscape-item, .portrait-item, .sport-item');
+        
+        container.addEventListener('click', (e) => {
+          // Erstelle Ripple-Element
+          const ripple = document.createElement('div');
+          const rect = container.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          
+          ripple.style.position = 'absolute';
+          ripple.style.borderRadius = '50%';
+          ripple.style.background = 'rgba(255, 255, 255, 0.3)';
+          ripple.style.transform = 'scale(0)';
+          ripple.style.animation = 'rippleEffect 0.6s linear';
+          ripple.style.left = (x - 50) + 'px';
+          ripple.style.top = (y - 50) + 'px';
+          ripple.style.width = '100px';
+          ripple.style.height = '100px';
+          ripple.style.pointerEvents = 'none';
+          ripple.style.zIndex = '5';
+          
+          container.style.position = 'relative';
+          container.appendChild(ripple);
+          
+          setTimeout(() => {
+            ripple.remove();
+          }, 600);
+        });
+      });
+    });
+
+    // CSS für Ripple-Effekt
+    const rippleCSS = `
+      @keyframes rippleEffect {
+        to {
+          transform: scale(4);
+          opacity: 0;
+        }
+      }
+    `;
+    
+    const styleSheet = document.createElement('style');
+    styleSheet.textContent = rippleCSS;
+    document.head.appendChild(styleSheet);
+
+    // 🎬 CLEAN VIEW TRANSITIONS 🎬
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        
+        if (target && document.startViewTransition) {
+          document.startViewTransition(() => {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          });
+        } else if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
       });
     });
   </script>

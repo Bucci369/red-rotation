@@ -1,0 +1,53 @@
+---
+// src/components/BackgroundVideo.astro
+export interface Props {
+  src: string;
+  poster?: string; // Optionales Vorschaubild
+}
+
+const { src, poster } = Astro.props;
+---
+
+<div class="absolute inset-0 w-full h-full overflow-hidden -z-10">
+  <video
+    class="w-full h-full object-cover"
+    src={src}
+    poster={poster}
+    autoplay
+    loop
+    muted
+    playsinline
+    data-smart-video
+  >
+    Dein Browser unterstützt keine Videos.
+  </video>
+  <div class="absolute inset-0 bg-black/50"></div>
+</div>
+
+<script>
+  // Diese Logik basiert auf dem im Projekt bereits vorhandenen "Intersection Observer Pattern".
+  document.addEventListener('astro:page-load', () => {
+    const videos = document.querySelectorAll<HTMLVideoElement>('[data-smart-video]');
+
+    if (!videos.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const video = entry.target as HTMLVideoElement;
+          if (entry.isIntersecting) {
+            video.play().catch(e => console.error("Video-Autoplay fehlgeschlagen:", e));
+          } else {
+            video.pause();
+          }
+        });
+      },
+      {
+        // Das Video startet/pausiert, wenn es zu 50% sichtbar/unsichtbar ist.
+        threshold: 0.5,
+      }
+    );
+
+    videos.forEach((video) => observer.observe(video));
+  });
+</script>
